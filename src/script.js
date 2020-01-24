@@ -2,7 +2,8 @@ const electron = require('electron');
 const { ipcRenderer } = electron;
 
 const form = document.querySelector('form');
-const item = document.querySelector('input');
+const item = document.querySelector('#input1');
+const item2 = document.querySelector('#input2');
 const list = document.querySelector('ul');
 
 //Render Items to Screen
@@ -19,7 +20,11 @@ ipcRenderer.on('loaded', (e, items) => items.forEach(item => render(item.item)))
 //Send Item to the server
 form.addEventListener('submit', e => {
   e.preventDefault();
-  ipcRenderer.send('addItem', { item: item.value });
+
+  //concat the two values and make the first letter uppercase
+  let test = item.value.charAt(0).toUpperCase() + item.value.slice(1) + ' ' + item2.value.charAt(0).toUpperCase() + item2.value.slice(1);
+
+  ipcRenderer.send('addItem', { item: test });
   form.reset();
 });
 
