@@ -51,8 +51,15 @@ ipcRenderer.on('loaded', (e, items) => items.forEach(item => render(item.item)))
 form.addEventListener('submit', e => {
   e.preventDefault();
 
+  //set the date format
+  var dateObj = new Date();
+  var month = dateObj.getMonth() + 1; //months from 1-12
+  var day = dateObj.getDate();
+  var year = dateObj.getFullYear();
+  issueDate = day + '/' + month + '/' + year;
+
   //new object with the input values
-  let colleague = new Colleague(item.value, item2.value, new Date());
+  let colleague = new Colleague(item.value, item2.value, issueDate);
 
   ipcRenderer.send('addItem', { item: colleague });
   form.reset();

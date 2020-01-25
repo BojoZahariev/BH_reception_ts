@@ -1,10 +1,7 @@
-{"item":{"firstName":"Aaa","lastName":"Ssss"},"_id":"A6PGzJEVOEVYFs50"}
-{"item":{"firstName":"Aa","lastName":"Aaa"},"_id":"AQ1j5U33PpYae5Ts"}
-{"item":{"date":"2020-01-25T23:08:33.684Z","firstName":"Aa","lastName":"Aaa"},"_id":"n2HmGOEv3rbp8Nzm"}
-{"item":{"firstName":"Bojo","lastName":"Zha"},"_id":"q9XG71ZGNZEL5XJf"}
-{"$$deleted":true,"_id":"A6PGzJEVOEVYFs50"}
-{"$$deleted":true,"_id":"AQ1j5U33PpYae5Ts"}
-{"$$deleted":true,"_id":"n2HmGOEv3rbp8Nzm"}
-{"$$deleted":true,"_id":"q9XG71ZGNZEL5XJf"}
-{"item":{"date":"2020-01-25T23:12:19.249Z","firstName":"Aa","lastName":"Bbb"},"_id":"tp2zGkn0EAMP0aKU"}
-{"item":{"date":"2020-01-25T23:12:38.944Z","firstName":"Cc","lastName":"Vvv"},"_id":"lXsYI98XD4Pe3Wik"}
+{"item":{"date":"2020-01-25T23:21:14.713Z","firstName":"Aaa","lastName":"Aaa"},"_id":"x28XFygFeOPJL4kp"}
+{"item":{"date":"2020-01-25T23:22:41.522Z","firstName":"Aa","lastName":"Aa"},"_id":"z4Mu90NSr9rrw7K1"}
+{"item":{"date":"25/1/2020","firstName":"Aaa","lastName":"Aaa"},"_id":"PggnEcM9PrJKUaMr"}
+{"$$deleted":true,"_id":"PggnEcM9PrJKUaMr"}
+{"$$deleted":true,"_id":"x28XFygFeOPJL4kp"}
+{"$$deleted":true,"_id":"z4Mu90NSr9rrw7K1"}
+{"item":{"date":"25/1/2020","firstName":"Aaa","lastName":"Sss"},"_id":"8L67JbwuR5r8Ujnp"}
