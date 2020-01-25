@@ -4,19 +4,42 @@ const { ipcRenderer } = electron;
 const form = document.querySelector('form');
 const item = document.querySelector('#input1');
 const item2 = document.querySelector('#input2');
+const radio1 = document.querySelector('#radio1');
 const list = document.querySelector('ul');
 
 class Colleague {
-  constructor(firstName, lastName) {
+  constructor(firstName, lastName, date) {
     this.firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
     this.lastName = lastName.charAt(0).toUpperCase() + lastName.slice(1);
+    this.date = date;
   }
 }
 
 //Render Items to Screen
 const render = item => {
   const li = document.createElement('li');
-  li.innerHTML = `${item.firstName}  ${item.lastName}`;
+
+  const name1 = document.createElement('p');
+  name1.textContent = item.firstName;
+  name1.classList.add('names');
+  li.appendChild(name1);
+
+  const name2 = document.createElement('p');
+  name2.textContent = item.lastName;
+  name2.classList.add('names');
+  li.appendChild(name2);
+
+  const date = document.createElement('p');
+  date.textContent = item.date;
+  date.classList.add('names');
+  li.appendChild(date);
+
+  const returned = document.createElement('input');
+  returned.type = 'radio';
+  returned.classList.add('names');
+  li.appendChild(returned);
+
+  // li.innerHTML = `${item.firstName}  ${item.lastName} ${radio1}`;
   list.appendChild(li);
 };
 
@@ -29,7 +52,7 @@ form.addEventListener('submit', e => {
   e.preventDefault();
 
   //new object with the input values
-  let colleague = new Colleague(item.value, item2.value);
+  let colleague = new Colleague(item.value, item2.value, new Date());
 
   ipcRenderer.send('addItem', { item: colleague });
   form.reset();

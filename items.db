@@ -1,7 +1,10 @@
-{"item":{"firstName":"Aaa","lastName":"Bbb"},"_id":"vDnH26WdIfJbePBg"}
-{"item":{"firstName":"Xcf","lastName":"Tr"},"_id":"4xp2SuVvVkgQZflg"}
-{"item":{"firstName":"","lastName":""},"_id":"4VQhcUzpLVA5fb6e"}
-{"item":{"firstName":"","lastName":""},"_id":"I1a2qinS8iiTsdho"}
-{"item":{"firstName":"","lastName":""},"_id":"qdnCIBJHC8B7Lrch"}
-{"item":{"firstName":"","lastName":""},"_id":"BVs6mDLzGb0LMU4Q"}
-{"item":{"firstName":"","lastName":""},"_id":"aBDKNKuTvdWKoldt"}
+{"item":{"firstName":"Aaa","lastName":"Ssss"},"_id":"A6PGzJEVOEVYFs50"}
+{"item":{"firstName":"Aa","lastName":"Aaa"},"_id":"AQ1j5U33PpYae5Ts"}
+{"item":{"date":"2020-01-25T23:08:33.684Z","firstName":"Aa","lastName":"Aaa"},"_id":"n2HmGOEv3rbp8Nzm"}
+{"item":{"firstName":"Bojo","lastName":"Zha"},"_id":"q9XG71ZGNZEL5XJf"}
+{"$$deleted":true,"_id":"A6PGzJEVOEVYFs50"}
+{"$$deleted":true,"_id":"AQ1j5U33PpYae5Ts"}
+{"$$deleted":true,"_id":"n2HmGOEv3rbp8Nzm"}
+{"$$deleted":true,"_id":"q9XG71ZGNZEL5XJf"}
+{"item":{"date":"2020-01-25T23:12:19.249Z","firstName":"Aa","lastName":"Bbb"},"_id":"tp2zGkn0EAMP0aKU"}
+{"item":{"date":"2020-01-25T23:12:38.944Z","firstName":"Cc","lastName":"Vvv"},"_id":"lXsYI98XD4Pe3Wik"}
