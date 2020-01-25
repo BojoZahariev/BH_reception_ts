@@ -6,10 +6,17 @@ const item = document.querySelector('#input1');
 const item2 = document.querySelector('#input2');
 const list = document.querySelector('ul');
 
+class Colleague {
+  constructor(firstName, lastName) {
+    this.firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1);
+    this.lastName = lastName.charAt(0).toUpperCase() + lastName.slice(1);
+  }
+}
+
 //Render Items to Screen
 const render = item => {
   const li = document.createElement('li');
-  li.innerHTML = item;
+  li.innerHTML = `${item.firstName}  ${item.lastName}`;
   list.appendChild(li);
 };
 
@@ -21,10 +28,10 @@ ipcRenderer.on('loaded', (e, items) => items.forEach(item => render(item.item)))
 form.addEventListener('submit', e => {
   e.preventDefault();
 
-  //concat the two values and make the first letter uppercase
-  let test = item.value.charAt(0).toUpperCase() + item.value.slice(1) + ' ' + item2.value.charAt(0).toUpperCase() + item2.value.slice(1);
+  //new object with the input values
+  let colleague = new Colleague(item.value, item2.value);
 
-  ipcRenderer.send('addItem', { item: test });
+  ipcRenderer.send('addItem', { item: colleague });
   form.reset();
 });
 
