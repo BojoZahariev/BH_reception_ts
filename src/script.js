@@ -34,10 +34,25 @@ const render = item => {
   date.classList.add('names');
   li.appendChild(date);
 
-  const returned = document.createElement('input');
-  returned.type = 'radio';
+  const returned = document.createElement('p');
+  returned.id = 'radio';
+  returned.textContent = 'not returned';
   returned.classList.add('names');
   li.appendChild(returned);
+
+  const deleteBtn = document.createElement('p');
+  deleteBtn.textContent = 'delete';
+  deleteBtn.classList.add('names');
+  li.appendChild(deleteBtn);
+
+  returned.addEventListener('click', function(e) {
+    this.textContent === 'not returned' ? (this.textContent = 'returned') : (this.textContent = 'not returned');
+  });
+
+  deleteBtn.addEventListener('click', function(e) {
+    var div = this.parentElement;
+    div.style.display = 'none';
+  });
 
   // li.innerHTML = `${item.firstName}  ${item.lastName} ${radio1}`;
   list.appendChild(li);
