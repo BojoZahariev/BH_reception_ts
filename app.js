@@ -40,6 +40,7 @@ ipcMain.on('addItem', (e, item) => {
   });
 
   mainWindow.webContents.send('added', item);
+  console.log('add' + item.id);
 });
 
 // Clears database and send event to client if sussesful
@@ -48,4 +49,10 @@ ipcMain.on('clearAll', () => {
     if (err) throw new Error(err);
     mainWindow.webContents.send('cleared');
   });
+});
+
+ipcMain.on('deleteItem', (e, item) => {
+  db.remove({ id: item.item.id }, {});
+
+  console.log(item.item._id);
 });

@@ -6,6 +6,7 @@ const item = document.querySelector('#input1');
 const item2 = document.querySelector('#input2');
 const radio1 = document.querySelector('#radio1');
 const list = document.querySelector('ul');
+var myArray = [];
 
 class Colleague {
   constructor(firstName, lastName, date) {
@@ -48,19 +49,20 @@ const render = item => {
   returned.addEventListener('click', function(e) {
     this.textContent === 'not returned' ? (this.textContent = 'returned') : (this.textContent = 'not returned');
   });
+  console.log(item);
 
   deleteBtn.addEventListener('click', function(e) {
     var div = this.parentElement;
     div.style.display = 'none';
+    ipcRenderer.send('deleteItem', { item });
   });
 
-  // li.innerHTML = `${item.firstName}  ${item.lastName} ${radio1}`;
   list.appendChild(li);
 };
 
 //Get All Items After Starting
 window.addEventListener('load', () => ipcRenderer.send('loadAll'));
-ipcRenderer.on('loaded', (e, items) => items.forEach(item => render(item.item)));
+ipcRenderer.on('loaded', (e, items) => items.forEach(item => render(item)));
 
 //Send Item to the server
 form.addEventListener('submit', e => {
@@ -76,13 +78,19 @@ form.addEventListener('submit', e => {
   //new object with the input values
   let colleague = new Colleague(item.value, item2.value, issueDate);
 
-  ipcRenderer.send('addItem', { item: colleague });
+  //ipcRenderer.send('addItem', { item: colleague });
+
+  ipcRenderer.send('addItem', { firstName: item.value, lastName: item2.value, date: issueDate, id: Date.now() });
+
   form.reset();
 });
 
 //Catches Add Item from server
-ipcRenderer.on('added', (e, item) => render(item.item));
+ipcRenderer.on('added', (e, item) => render(item));
 
 //Catches ClearAll from menu, sends the event to server to clear the db.
 ipcRenderer.on('clearAll', () => ipcRenderer.send('clearAll'));
 ipcRenderer.on('cleared', () => (list.innerHTML = ''));
+
+//Catches delete
+//ipcRenderer.on('deleted', (e, item) => console.log(item));
