@@ -40,7 +40,6 @@ ipcMain.on('addItem', (e, item) => {
   });
 
   mainWindow.webContents.send('added', item);
-  console.log('add' + item.id);
 });
 
 // Clears database and send event to client if sussesful
@@ -53,6 +52,12 @@ ipcMain.on('clearAll', () => {
 
 ipcMain.on('deleteItem', (e, item) => {
   db.remove({ id: item.item.id }, {});
+});
 
-  console.log(item.item._id);
+ipcMain.on('updateItemReturned', (e, item) => {
+  db.update({ id: item.item.id }, { id: item.item.id, firstName: item.item.firstName, lastName: item.item.lastName, date: item.item.issueDate, returned: 'Returned' }, {});
+});
+
+ipcMain.on('updateItemNotReturned', (e, item) => {
+  db.update({ id: item.item.id }, { id: item.item.id, firstName: item.item.firstName, lastName: item.item.lastName, date: item.item.issueDate, returned: 'Not Returned' }, {});
 });
