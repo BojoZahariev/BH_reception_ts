@@ -55,7 +55,7 @@ const render = item => {
   });
 
   deleteBtn.addEventListener('click', function(e) {
-    var div = this.parentElement;
+    let div = this.parentElement;
     div.style.display = 'none';
     ipcRenderer.send('deleteItem', { item });
   });
@@ -73,11 +73,13 @@ form.addEventListener('submit', e => {
 
   if (item.value !== '' && item2.value !== '') {
     //set the date format
-    var dateObj = new Date();
-    var month = dateObj.getMonth() + 1; //months from 1-12
-    var day = dateObj.getDate();
-    var year = dateObj.getFullYear();
-    issueDate = day + '/' + month + '/' + year;
+    let dateObj = new Date();
+    let month = dateObj.getMonth() + 1; //months from 1-12
+    let day = dateObj.getDate();
+    let year = dateObj.getFullYear();
+    let hours = dateObj.getHours();
+    let minutes = dateObj.getMinutes();
+    issueDate = day + '/' + month + '/' + year + ' ' + hours + ':' + minutes;
 
     ipcRenderer.send('addItem', { id: Date.now(), firstName: item.value, lastName: item2.value, date: issueDate, returned: 'Not Returned' });
 
