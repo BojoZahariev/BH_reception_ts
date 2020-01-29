@@ -55,9 +55,17 @@ ipcMain.on('deleteItem', (e, item) => {
 });
 
 ipcMain.on('updateItemReturned', (e, item) => {
-  db.update({ id: item.item.id }, { id: item.item.id, firstName: item.item.firstName, lastName: item.item.lastName, date: item.item.date, returned: 'Returned' }, {});
+  db.update(
+    { id: item.item.id },
+    { id: item.item.id, firstName: item.item.firstName, lastName: item.item.lastName, date: item.item.date, returned: 'Returned', type: 'colleagues' },
+    {}
+  );
 });
 
 ipcMain.on('updateItemNotReturned', (e, item) => {
-  db.update({ id: item.item.id }, { id: item.item.id, firstName: item.item.firstName, lastName: item.item.lastName, date: item.item.date, returned: 'Not Returned' }, {});
+  db.update(
+    { id: item.item.id },
+    { id: item.item.id, firstName: item.item.firstName, lastName: item.item.lastName, date: item.item.date, returned: 'Not Returned', type: 'colleagues' },
+    {}
+  );
 });

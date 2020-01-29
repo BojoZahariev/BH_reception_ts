@@ -9,14 +9,45 @@
     <title>Electron</title>
   </head>
 
-  <body class="bg-gray-900 text-white flex flex-col items-center">
-    <form>
-      <input id="input1" type="text" placeholder="First Name" class="bg-transparent rounded h-12 mt-4 pl-3" autofocus />
-      <input id="input2" type="text" placeholder="Last Name" class="bg-transparent rounded h-12 mt-4 pl-3" autofocus />
+  <body>
+    <div id="initial">
+      <p>
+        Welcome to Britannia House
+      </p>
 
-      <button type="submit" class="bg-blue-800 rounded h-12 w-16">Submit</button>
-    </form>
-    <ul class="mt-4 p-6"></ul>
+      <p id="colleaguesBtn">COLLEAGUES</p>
+      <p id="visitorsBtn">VISITORS</p>
+    </div>
+
+    <div id="colleagues">
+      <form id="colleaguesForm">
+        <input id="input1" type="text" placeholder="First Name" class="inputs" autofocus />
+        <input id="input2" type="text" placeholder="Last Name" class="inputs" autofocus />
+
+        <button type="submit" class="submitBtn">Submit</button>
+      </form>
+    </div>
+
+    <div id="visitors">
+      <form id="visitorsForm">
+        <input id="input1Visitors" type="text" placeholder="First Name" class="inputs" autofocus />
+        <input id="input2Visitors" type="text" placeholder="Last Name" class="inputs" autofocus />
+        <input id="input3Visitors" type="text" placeholder="Company" class="inputs" autofocus />
+        <input id="input4Visitors" type="text" placeholder="Visiting" class="inputs" autofocus />
+
+        <button type="submit" class="submitBtn">Submit</button>
+      </form>
+    </div>
+
+    <div id="colleaguesListDiv">
+      Colleagues
+      <ul id="colleaguesList"></ul>
+    </div>
+
+    <div id="visitorsListDiv">
+      Visitors
+      <ul id="visitorsList"></ul>
+    </div>
 
     <script src="./script.js"></script>
   </body>
