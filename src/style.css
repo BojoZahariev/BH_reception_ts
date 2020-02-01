@@ -155,9 +155,16 @@ body {
 
 .blink {
   animation: blinking 0.5s step-end infinite alternate;
+  -webkit-animation: blinking 0.5s step-end infinite alternate;
 }
 
 @keyframes blinking {
+  50% {
+    border-color: #bb4430;
+  }
+}
+
+@-webkit-keyframes blinking {
   50% {
     border-color: #bb4430;
   }
@@ -243,6 +250,9 @@ body {
   color: #222;
   list-style: none;
   border: 1px solid #ffc220;
+
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 .colleaguesListPart {
@@ -273,3 +283,16 @@ body {
   flex-basis: 100px;
 }
 
+#passwordDiv {
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 350px;
+  padding: 20px;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  text-align: center;
+  background-color: #76c043;
+  color: #222;
+}

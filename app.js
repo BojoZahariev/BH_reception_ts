@@ -10,18 +10,21 @@ let mainWindow;
 
 app.on('ready', () => {
   mainWindow = new BrowserWindow({
+    icon: path.join(__dirname, 'assets/icons/win/icon.ico'),
+    title: 'Britannia House Reception',
     webPreferences: { nodeIntegration: true }
   });
   mainWindow.loadURL(
     url.format({
       pathname: path.join(__dirname, 'src/index.html'),
-      protocol: 'file:',
+      protocol: 'File:',
       slashes: true
     })
   );
   mainWindow.on('closed', () => app.quit());
-
+  mainWindow.maximize();
   const mainMenu = Menu.buildFromTemplate(menuBar);
+
   Menu.setApplicationMenu(mainMenu);
 });
 
@@ -31,7 +34,14 @@ const db = new Datastore({
 });
 
 // Get all items from db and send them to the client
-ipcMain.on('loadAll', () => db.find({}, (err, items) => mainWindow.webContents.send('loaded', items)));
+//ipcMain.on('loadAll', () => db.find({}, (err, items) => mainWindow.webContents.send('loaded', items)));
+
+ipcMain.on('loadAll', () =>
+  db
+    .find({})
+    .sort({ date: 1 })
+    .exec((err, items) => mainWindow.webContents.send('loaded', items))
+);
 
 //Saves item and returns it to client
 ipcMain.on('addItem', (e, item) => {

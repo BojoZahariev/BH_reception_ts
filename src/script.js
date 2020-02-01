@@ -29,6 +29,11 @@ const visitorsBtn = document.querySelector('#visitorsBtn');
 const backBtn = document.querySelector('#backBtn');
 const colleaguesListBtn = document.querySelector('#colleaguesListBtn');
 const visitorsListBtn = document.querySelector('#visitorsListBtn');
+const passwordDiv = document.querySelector('#passwordDiv');
+const inputPassword = document.querySelector('#inputPassword');
+const passwordSubmit = document.querySelector('#passwordSubmit');
+const passwordMsg = document.querySelector('#passwordMsg');
+const passwordForm = document.querySelector('#passwordForm');
 
 colleaguesBtn.addEventListener('click', function(e) {
   initialDiv.style.display = 'none';
@@ -120,9 +125,22 @@ const render = item => {
   });
 
   deleteBtn.addEventListener('click', function(e) {
-    let div = this.parentElement;
-    div.style.display = 'none';
-    ipcRenderer.send('deleteItem', { item });
+    passwordDiv.style.display = 'block';
+    passwordSubmit.addEventListener('click', function(e) {
+      if (inputPassword.value === 'bh') {
+        let div = deleteBtn.parentElement;
+        div.style.display = 'none';
+        ipcRenderer.send('deleteItem', { item });
+        passwordDiv.style.display = 'none';
+      } else {
+        passwordMsg.textContent = 'Wrong password';
+        passwordForm.reset();
+        setTimeout(function() {
+          passwordDiv.style.display = 'none';
+          passwordMsg.textContent = 'Enter password';
+        }, 1500);
+      }
+    });
   });
 
   list.appendChild(li);
@@ -164,9 +182,22 @@ const renderVisitors = item => {
   li.appendChild(deleteBtn);
 
   deleteBtn.addEventListener('click', function(e) {
-    let div = this.parentElement;
-    div.style.display = 'none';
-    ipcRenderer.send('deleteItem', { item });
+    passwordDiv.style.display = 'block';
+    passwordSubmit.addEventListener('click', function(e) {
+      if (inputPassword.value === 'bh') {
+        let div = deleteBtn.parentElement;
+        div.style.display = 'none';
+        ipcRenderer.send('deleteItem', { item });
+        passwordDiv.style.display = 'none';
+      } else {
+        passwordMsg.textContent = 'Wrong password';
+        passwordForm.reset();
+        setTimeout(function() {
+          passwordDiv.style.display = 'none';
+          passwordMsg.textContent = 'Enter password';
+        }, 1500);
+      }
+    });
   });
 
   visitorsList.appendChild(li);
@@ -188,6 +219,8 @@ ipcRenderer.on('loaded', (e, items) =>
 
 //Send Item to the server
 colleaguesSubmit.addEventListener('click', e => {
+  e.preventDefault();
+
   if (item.value.length > 1 && item2.value.length > 1 && item3.value.length > 1) {
     //set the date format
     let dateObj = new Date();
@@ -213,10 +246,15 @@ colleaguesSubmit.addEventListener('click', e => {
   }
 });
 
-visitorsForm.addEventListener('submit', e => {
+visitorsSubmit.addEventListener('click', e => {
   e.preventDefault();
 
-  if (visitorsItem.value.length > 1 && visitorsItem2.value.length > 1) {
+  if (
+    visitorsItem.value.length > 1 &&
+    visitorsItem2.value.length > 1 &&
+    visitorsItem3.value.length > 1 &&
+    visitorsItem4.value.length > 1
+  ) {
     //set the date format
     let dateObj = new Date();
     let month = addZero(dateObj.getMonth() + 1);
@@ -259,9 +297,27 @@ ipcRenderer.on('added', (e, item) => {
   }
 });
 
-//Catches ClearAll from menu, sends the event to server to clear the db.
-ipcRenderer.on('clearAll', () => ipcRenderer.send('clearAll'));
-ipcRenderer.on('cleared', () => (list.innerHTML = ''));
+//Catches ClearAll from menu, asks for a password and sends the event to server to clear the db.
+ipcRenderer.on('clearAll', () => {
+  passwordDiv.style.display = 'block';
+  passwordSubmit.addEventListener('click', function(e) {
+    if (inputPassword.value === 'bh') {
+      ipcRenderer.send('clearAll');
+      passwordDiv.style.display = 'none';
+    } else {
+      passwordMsg.textContent = 'Wrong password';
+      passwordForm.reset();
+      setTimeout(function() {
+        passwordDiv.style.display = 'none';
+        passwordMsg.textContent = 'Enter password';
+      }, 1500);
+    }
+  });
+});
+ipcRenderer.on('cleared', () => {
+  list.innerHTML = '';
+  visitorsList.innerHTML = '';
+});
 
 //Catches delete
 //ipcRenderer.on('deleted', (e, item) => console.log(item));
