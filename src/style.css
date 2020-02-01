@@ -73,14 +73,14 @@ body {
 
 #logo {
   width: 400px;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   right: 0;
 }
 
 #backBtn {
   width: 100px;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 10px;
   cursor: pointer;
@@ -103,7 +103,7 @@ body {
 }
 
 #listButtons {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   padding: 10px;
   width: 100%;
@@ -184,12 +184,14 @@ body {
   box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.75);
 }
 
-.submitBtn:hover {
+.submitBtn:hover,
+.deleteBtn:hover {
   background-color: #aa7f08;
   color: #fff;
 }
 
-.submitBtn:active {
+.submitBtn:active,
+.deleteBtn:active {
   -ms-transform: translateY(1px);
   -webkit-transform: translateY(1px);
   transform: translateY(1px);
@@ -259,6 +261,7 @@ body {
   display: flex;
   justify-content: center;
   border-bottom: 1px solid #ffc220;
+  padding: 5px;
 }
 
 .head {
@@ -271,21 +274,37 @@ body {
   flex-basis: 20%;
 }
 
-#listInput {
-  text-transform: uppercase;
+.listInput {
+  cursor: pointer;
 }
 
-#deleteBtn {
+.deleteBtn {
   flex-basis: 80px;
+  display: inline-block;
+  padding: 7px 10px;
+  background-color: #ffc220;
+  border-radius: 5px;
+  color: #222;
+  cursor: pointer;
+  user-select: none;
+  -webkit-box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.75);
+  max-width: 80px;
+  margin: 0;
 }
 
 .last {
-  flex-basis: 100px;
+  flex-basis: 80px;
+}
+
+.returned {
+  cursor: pointer;
 }
 
 #passwordDiv {
   display: none;
-  position: absolute;
+  position: fixed;
   top: 10px;
   left: 50%;
   width: 350px;
@@ -295,4 +314,21 @@ body {
   text-align: center;
   background-color: #76c043;
   color: #222;
+}
+
+#tyDiv {
+  display: none;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  padding: 80px;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  text-align: center;
+  background-color: #76c043;
+  border: 1px solid #ffc220;
+}
+
+.tyTitle {
+  padding: 0;
 }

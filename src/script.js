@@ -34,6 +34,7 @@ const inputPassword = document.querySelector('#inputPassword');
 const passwordSubmit = document.querySelector('#passwordSubmit');
 const passwordMsg = document.querySelector('#passwordMsg');
 const passwordForm = document.querySelector('#passwordForm');
+const tyDiv = document.querySelector('#tyDiv');
 
 colleaguesBtn.addEventListener('click', function(e) {
   initialDiv.style.display = 'none';
@@ -70,13 +71,17 @@ visitorsListBtn.addEventListener('click', function(e) {
 });
 
 backBtn.addEventListener('click', function(e) {
+  backToInitial();
+});
+
+const backToInitial = () => {
   initialDiv.style.display = 'block';
   visitorsDiv.style.display = 'none';
   colleaguesDiv.style.display = 'none';
   backBtn.style.display = 'none';
   colleaguesListDiv.style.display = 'none';
   visitorsListDiv.style.display = 'none';
-});
+};
 
 //Render Items to Screen
 const render = item => {
@@ -104,14 +109,22 @@ const render = item => {
   li.appendChild(card);
 
   const returnedCheck = document.createElement('p');
-  returnedCheck.id = 'radio';
   returnedCheck.textContent = item.returned;
   returnedCheck.classList.add('names');
+  returnedCheck.classList.add('returned');
   li.appendChild(returnedCheck);
+
+  const note = document.createElement('p');
+  note.textContent = item.note;
+  note.classList.add('names');
+  note.classList.add('listInput');
+  li.appendChild(note);
 
   const deleteBtn = document.createElement('p');
   deleteBtn.textContent = 'delete';
   deleteBtn.classList.add('names');
+  deleteBtn.classList.add('deleteBtn');
+
   li.appendChild(deleteBtn);
 
   returnedCheck.addEventListener('click', function(e) {
@@ -132,6 +145,7 @@ const render = item => {
         div.style.display = 'none';
         ipcRenderer.send('deleteItem', { item });
         passwordDiv.style.display = 'none';
+        passwordForm.reset();
       } else {
         passwordMsg.textContent = 'Wrong password';
         passwordForm.reset();
@@ -179,6 +193,7 @@ const renderVisitors = item => {
   const deleteBtn = document.createElement('p');
   deleteBtn.textContent = 'delete';
   deleteBtn.classList.add('names');
+  deleteBtn.classList.add('deleteBtn');
   li.appendChild(deleteBtn);
 
   deleteBtn.addEventListener('click', function(e) {
@@ -221,7 +236,7 @@ ipcRenderer.on('loaded', (e, items) =>
 colleaguesSubmit.addEventListener('click', e => {
   e.preventDefault();
 
-  if (item.value.length > 1 && item2.value.length > 1 && item3.value.length > 1) {
+  if (item.value.length > 1 && item2.value.length > 1 && item3.value.length > 0) {
     //set the date format
     let dateObj = new Date();
     let month = addZero(dateObj.getMonth() + 1);
@@ -239,10 +254,15 @@ colleaguesSubmit.addEventListener('click', e => {
       lastName: item2.value,
       card: item3.value,
       returned: 'Not Returned',
+      note: 'Click to add',
       type: 'colleagues'
     });
 
+    playSound('success');
+    backToInitial();
     form.reset();
+  } else {
+    playSound('fail');
   }
 });
 
@@ -275,7 +295,12 @@ visitorsSubmit.addEventListener('click', e => {
       type: 'visitors'
     });
 
+    playSound('success');
+    backToInitial();
+
     visitorsForm.reset();
+  } else {
+    playSound('fail');
   }
 });
 
@@ -290,10 +315,8 @@ const addZero = i => {
 ipcRenderer.on('added', (e, item) => {
   if (item.type === 'colleagues') {
     render(item);
-    playSound();
   } else {
     renderVisitors(item);
-    playSound();
   }
 });
 
@@ -314,15 +337,24 @@ ipcRenderer.on('clearAll', () => {
     }
   });
 });
+
 ipcRenderer.on('cleared', () => {
   list.innerHTML = '';
   visitorsList.innerHTML = '';
 });
 
-//Catches delete
-//ipcRenderer.on('deleted', (e, item) => console.log(item));
+const playSound = status => {
+  let sound1 = document.getElementById('audio1');
+  let sound2 = document.getElementById('audio2');
+  if (status === 'success') {
+    sound1.play();
 
-const playSound = () => {
-  var sound = document.getElementById('audio');
-  sound.play();
+    //show thank you
+    tyDiv.style.display = 'block';
+    setTimeout(function() {
+      tyDiv.style.display = 'none';
+    }, 2500);
+  } else if (status === 'fail') {
+    sound2.play();
+  }
 };

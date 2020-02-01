@@ -33,9 +33,7 @@ const db = new Datastore({
   autoload: true
 });
 
-// Get all items from db and send them to the client
-//ipcMain.on('loadAll', () => db.find({}, (err, items) => mainWindow.webContents.send('loaded', items)));
-
+// Get all items from db sort by date and send them to the client
 ipcMain.on('loadAll', () =>
   db
     .find({})
@@ -74,6 +72,7 @@ ipcMain.on('updateItemReturned', (e, item) => {
       card: item.item.card,
       date: item.item.date,
       returned: 'Returned',
+      note: item.item.note,
       type: 'colleagues'
     },
     {}
@@ -90,6 +89,7 @@ ipcMain.on('updateItemNotReturned', (e, item) => {
       card: item.item.card,
       date: item.item.date,
       returned: 'Not Returned',
+      note: item.item.note,
       type: 'colleagues'
     },
     {}
