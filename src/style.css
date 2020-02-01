@@ -1,8 +1,275 @@
-body {
-  background-color: #0071ce;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.names {
+body {
+  background-color: #007dc6;
+  height: 100vh;
+  background-image: url(images/Bhblue2.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  letter-spacing: 0.5px;
+  font-family: 'Lato', sans-serif;
+}
+
+/*INITIAL*/
+.initial {
+  position: relative;
+}
+
+.title {
+  font-size: 60px;
+  color: #ffc220;
+  padding-top: 20vh;
+  text-align: center;
+  font-weight: 700;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.buttons {
+  margin-top: 20vh;
+  text-align: center;
+}
+
+#colleaguesBtn,
+#visitorsBtn {
+  display: inline-block;
+  margin: 0px 50px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #76c043;
+  overflow: hidden;
+  line-height: 200px;
+  text-align: center;
+  font-size: 22px;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid #45632f;
+  -webkit-box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.75);
+  transition: all 0.3s;
+}
+
+#colleaguesBtn:hover,
+#visitorsBtn:hover {
+  font-size: 24px;
+}
+
+#colleaguesBtn:active,
+#visitorsBtn:active {
+  -ms-transform: translateY(1px);
+  -webkit-transform: translateY(1px);
+  transform: translateY(1px);
+  -webkit-box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.75);
+}
+
+#logo {
+  width: 400px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+#backBtn {
+  width: 100px;
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  cursor: pointer;
+  display: none;
+  transform: scaleX(-1);
+  transition: all 0.3s;
+}
+
+#backBtn:hover {
+  left: 0;
+}
+
+.instructions {
+  font-size: 40px;
+  color: #ffc220;
+  padding-top: 20vh;
+  text-align: center;
+  font-weight: 700;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+#listButtons {
+  position: absolute;
+  bottom: 0;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+#colleaguesListBtn,
+#visitorsListBtn {
+  color: #76c043;
+  cursor: pointer;
   display: inline;
   padding: 10px;
 }
+
+#colleaguesListBtn:hover,
+#visitorsListBtn:hover {
+  color: #45632f;
+}
+
+/*Colleagues Form*/
+
+#colleagues {
+  display: none;
+}
+
+#colleaguesForm {
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  top: 49%;
+}
+
+.inputs {
+  text-transform: uppercase;
+  border: 2px solid #ffc220;
+  border-radius: 5px;
+  background-color: #fff;
+  padding: 5px 5px;
+  box-shadow: inset 0 3px 6px #0000001a;
+
+  width: 250px;
+  font-size: 20px;
+  margin: 10px;
+}
+
+#input3 {
+  width: 100px;
+}
+
+.blink {
+  animation: blinking 0.5s step-end infinite alternate;
+}
+
+@keyframes blinking {
+  50% {
+    border-color: #bb4430;
+  }
+}
+
+.submitBtn {
+  display: inline-block;
+  padding: 8px 10px;
+  margin-left: 20px;
+  background-color: #ffc220;
+  border-radius: 5px;
+  color: #222;
+  cursor: pointer;
+  user-select: none;
+  -webkit-box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 1px 4px 2px rgba(0, 0, 0, 0.75);
+}
+
+.submitBtn:hover {
+  background-color: #aa7f08;
+  color: #fff;
+}
+
+.submitBtn:active {
+  -ms-transform: translateY(1px);
+  -webkit-transform: translateY(1px);
+  transform: translateY(1px);
+  -webkit-box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 1px 1px 4px 0px rgba(0, 0, 0, 0.75);
+}
+
+/*Visitors*/
+
+#visitors {
+  display: none;
+}
+
+.instructionsListTitle {
+  font-size: 30px;
+  color: #ffc220;
+  padding: 10px;
+  text-align: center;
+  font-weight: 700;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.smallTitle {
+  padding: 10px;
+  font-size: 22px;
+  color: #ffc220;
+  text-align: center;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+.instructionsText {
+  font-size: 20px;
+  color: #222;
+  text-align: center;
+}
+
+#visitorsForm {
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  top: 49%;
+}
+
+/*LISTS*/
+
+#colleaguesListDiv,
+#visitorsListDiv {
+  display: none;
+  width: 90%;
+  margin: auto;
+  padding: 10px;
+}
+
+#colleaguesList,
+#visitorsList {
+  background-color: #fcfcfc;
+  color: #222;
+  list-style: none;
+  border: 1px solid #ffc220;
+}
+
+.colleaguesListPart {
+  display: flex;
+  justify-content: center;
+  border-bottom: 1px solid #ffc220;
+}
+
+.head {
+  border-bottom: 1px solid #222;
+  font-size: 22px;
+}
+
+.names {
+  padding: 10px;
+  flex-basis: 20%;
+}
+
+#listInput {
+  text-transform: uppercase;
+}
+
+#deleteBtn {
+  flex-basis: 80px;
+}
+
+.last {
+  flex-basis: 100px;
+}
+

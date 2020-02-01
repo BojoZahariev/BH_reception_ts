@@ -4,50 +4,84 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
+
+    <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet" />
+
     <link rel="stylesheet" type="text/css" href="./style.css" />
     <title>Electron</title>
   </head>
 
   <body>
     <div id="initial">
-      <p>
+      <p class="title">
         Welcome to Britannia House
       </p>
 
-      <p id="colleaguesBtn">COLLEAGUES</p>
-      <p id="visitorsBtn">VISITORS</p>
+      <div class="buttons">
+        <p id="colleaguesBtn">COLLEAGUES</p>
+        <p id="visitorsBtn">VISITORS</p>
+      </div>
     </div>
 
     <div id="colleagues">
+      <p class="instructions">Please wear this badge at all times whilst in the building.</p>
       <form id="colleaguesForm">
         <input id="input1" type="text" placeholder="First Name" class="inputs" autofocus />
-        <input id="input2" type="text" placeholder="Last Name" class="inputs" autofocus />
+        <input id="input2" type="text" placeholder="Last Name" class="inputs" />
+        <input id="input3" type="text" placeholder="Card #" class="inputs" />
 
-        <button type="submit" class="submitBtn">Submit</button>
+        <p id="colleaguesSubmit" class="submitBtn">SUBMIT</p>
+
+        <p class="instructions">Please return the badge to Security at the end of your work day</p>
       </form>
     </div>
 
     <div id="visitors">
+      <p class="instructionsListTitle">Whilst you are here, please observe the following:</p>
+      <p class="smallTitle">Security</p>
+      <p class="instructionsText">You may only enter work areas when escorted by an ASDA colleague.</p>
+      <p class="instructionsText">Please wear this badge at all times whilst in the building.</p>
+      <p class="smallTitle">Fire and Emergencies</p>
+      <p class="instructionsText">
+        In an emergency the fire alarm will sound. Please follow the fire exit signs and the evacuation route followed
+        by ASDA colleagues.
+      </p>
+      <p class="smallTitle">IT</p>
+      <p class="instructionsText">Under no circumstances should non ASDA PCs or laptops be connected to the network.</p>
+
       <form id="visitorsForm">
         <input id="input1Visitors" type="text" placeholder="First Name" class="inputs" autofocus />
-        <input id="input2Visitors" type="text" placeholder="Last Name" class="inputs" autofocus />
-        <input id="input3Visitors" type="text" placeholder="Company" class="inputs" autofocus />
-        <input id="input4Visitors" type="text" placeholder="Visiting" class="inputs" autofocus />
+        <input id="input2Visitors" type="text" placeholder="Last Name" class="inputs" />
+        <input id="input3Visitors" type="text" placeholder="Company" class="inputs" />
+        <input id="input4Visitors" type="text" placeholder="Visiting" class="inputs" />
 
-        <button type="submit" class="submitBtn">Submit</button>
+        <p id="visitorsSubmit" class="submitBtn">SUBMIT</p>
+
+        <p class="instructions">Please return the pass to Security upon departure</p>
       </form>
     </div>
 
     <div id="colleaguesListDiv">
-      Colleagues
+      <p class="smallTitle">Colleagues</p>
       <ul id="colleaguesList"></ul>
     </div>
 
     <div id="visitorsListDiv">
-      Visitors
+      <p class="smallTitle">Visitors</p>
+
       <ul id="visitorsList"></ul>
     </div>
+
+    <audio id="audio" src="http://www.soundjay.com/button/beep-07.wav" autoplay="false"></audio>
+
+    <img id="backBtn" src="images/arrow.png" />
+
+    <div id="listButtons">
+      <p id="colleaguesListBtn">Colleagues List</p>
+      <p id="visitorsListBtn">Visitors List</p>
+    </div>
+
+    <img id="logo" src="images/WalmartGBStrans.png" />
 
     <script src="./script.js"></script>
   </body>

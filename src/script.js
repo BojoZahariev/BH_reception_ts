@@ -5,7 +5,9 @@ const { ipcRenderer } = electron;
 const form = document.querySelector('#colleaguesForm');
 const item = document.querySelector('#input1');
 const item2 = document.querySelector('#input2');
+const item3 = document.querySelector('#input3');
 const list = document.querySelector('#colleaguesList');
+const colleaguesSubmit = document.querySelector('#colleaguesSubmit');
 
 //visitors
 const visitorsForm = document.querySelector('#visitorsForm');
@@ -14,10 +16,67 @@ const visitorsItem2 = document.querySelector('#input2Visitors');
 const visitorsItem3 = document.querySelector('#input3Visitors');
 const visitorsItem4 = document.querySelector('#input4Visitors');
 const visitorsList = document.querySelector('#visitorsList');
+const visitorsSubmit = document.querySelector('#visitorsSubmit');
+
+//divs and buttons
+const initialDiv = document.querySelector('#initial');
+const colleaguesDiv = document.querySelector('#colleagues');
+const visitorsDiv = document.querySelector('#visitors');
+const colleaguesListDiv = document.querySelector('#colleaguesListDiv');
+const visitorsListDiv = document.querySelector('#visitorsListDiv');
+const colleaguesBtn = document.querySelector('#colleaguesBtn');
+const visitorsBtn = document.querySelector('#visitorsBtn');
+const backBtn = document.querySelector('#backBtn');
+const colleaguesListBtn = document.querySelector('#colleaguesListBtn');
+const visitorsListBtn = document.querySelector('#visitorsListBtn');
+
+colleaguesBtn.addEventListener('click', function(e) {
+  initialDiv.style.display = 'none';
+  colleaguesDiv.style.display = 'block';
+  backBtn.style.display = 'block';
+  item.focus();
+});
+
+visitorsBtn.addEventListener('click', function(e) {
+  initialDiv.style.display = 'none';
+  visitorsDiv.style.display = 'block';
+  backBtn.style.display = 'block';
+  visitorsItem.focus();
+});
+
+colleaguesListBtn.addEventListener('click', function(e) {
+  initialDiv.style.display = 'none';
+  visitorsDiv.style.display = 'none';
+  colleaguesDiv.style.display = 'none';
+  visitorsListDiv.style.display = 'none';
+
+  colleaguesListDiv.style.display = 'block';
+  backBtn.style.display = 'block';
+});
+
+visitorsListBtn.addEventListener('click', function(e) {
+  initialDiv.style.display = 'none';
+  visitorsDiv.style.display = 'none';
+  colleaguesDiv.style.display = 'none';
+  colleaguesListDiv.style.display = 'none';
+
+  visitorsListDiv.style.display = 'block';
+  backBtn.style.display = 'block';
+});
+
+backBtn.addEventListener('click', function(e) {
+  initialDiv.style.display = 'block';
+  visitorsDiv.style.display = 'none';
+  colleaguesDiv.style.display = 'none';
+  backBtn.style.display = 'none';
+  colleaguesListDiv.style.display = 'none';
+  visitorsListDiv.style.display = 'none';
+});
 
 //Render Items to Screen
 const render = item => {
   const li = document.createElement('li');
+  li.classList.add('colleaguesListPart');
 
   const date = document.createElement('p');
   date.textContent = item.date;
@@ -33,6 +92,11 @@ const render = item => {
   name2.textContent = item.lastName.charAt(0).toUpperCase() + item.lastName.slice(1);
   name2.classList.add('names');
   li.appendChild(name2);
+
+  const card = document.createElement('p');
+  card.textContent = item.card;
+  card.classList.add('names');
+  li.appendChild(card);
 
   const returnedCheck = document.createElement('p');
   returnedCheck.id = 'radio';
@@ -67,6 +131,7 @@ const render = item => {
 //render visitors
 const renderVisitors = item => {
   const li = document.createElement('li');
+  li.classList.add('colleaguesListPart');
 
   const date = document.createElement('p');
   date.textContent = item.date;
@@ -101,7 +166,7 @@ const renderVisitors = item => {
   deleteBtn.addEventListener('click', function(e) {
     let div = this.parentElement;
     div.style.display = 'none';
-    //ipcRenderer.send('deleteItem', { item });
+    ipcRenderer.send('deleteItem', { item });
   });
 
   visitorsList.appendChild(li);
@@ -122,10 +187,8 @@ ipcRenderer.on('loaded', (e, items) =>
 );
 
 //Send Item to the server
-form.addEventListener('submit', e => {
-  e.preventDefault();
-
-  if (item.value.length > 1 && item2.value.length > 1) {
+colleaguesSubmit.addEventListener('click', e => {
+  if (item.value.length > 1 && item2.value.length > 1 && item3.value.length > 1) {
     //set the date format
     let dateObj = new Date();
     let month = addZero(dateObj.getMonth() + 1);
@@ -136,7 +199,15 @@ form.addEventListener('submit', e => {
 
     issueDate = day + '/' + month + '/' + year + ' ' + hours + ':' + minutes;
 
-    ipcRenderer.send('addItem', { id: Date.now(), firstName: item.value, lastName: item2.value, date: issueDate, returned: 'Not Returned', type: 'colleagues' });
+    ipcRenderer.send('addItem', {
+      id: Date.now(),
+      date: issueDate,
+      firstName: item.value,
+      lastName: item2.value,
+      card: item3.value,
+      returned: 'Not Returned',
+      type: 'colleagues'
+    });
 
     form.reset();
   }
@@ -158,9 +229,9 @@ visitorsForm.addEventListener('submit', e => {
 
     ipcRenderer.send('addItem', {
       id: Date.now(),
+      date: issueDate,
       firstName: visitorsItem.value,
       lastName: visitorsItem2.value,
-      date: issueDate,
       company: visitorsItem3.value,
       visiting: visitorsItem4.value,
       type: 'visitors'
@@ -181,8 +252,10 @@ const addZero = i => {
 ipcRenderer.on('added', (e, item) => {
   if (item.type === 'colleagues') {
     render(item);
+    playSound();
   } else {
     renderVisitors(item);
+    playSound();
   }
 });
 
@@ -192,3 +265,8 @@ ipcRenderer.on('cleared', () => (list.innerHTML = ''));
 
 //Catches delete
 //ipcRenderer.on('deleted', (e, item) => console.log(item));
+
+const playSound = () => {
+  var sound = document.getElementById('audio');
+  sound.play();
+};
