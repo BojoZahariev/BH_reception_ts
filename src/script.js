@@ -30,6 +30,7 @@ const backBtn = document.querySelector('#backBtn');
 const colleaguesListBtn = document.querySelector('#colleaguesListBtn');
 const visitorsListBtn = document.querySelector('#visitorsListBtn');
 const tyDiv = document.querySelector('#tyDiv');
+var lastDate;
 
 colleaguesBtn.addEventListener('click', function(e) {
   initialDiv.style.display = 'none';
@@ -207,7 +208,11 @@ const render = item => {
   deleteBtn.classList.add('names');
   deleteBtn.classList.add('deleteBtn');
 
+  if (item.date.slice(0, 3) !== lastDate) {
+    li.classList.add('lastLi');
+  }
   li.appendChild(deleteBtn);
+  lastDate = item.date.slice(0, 3);
 
   returnedCheck.addEventListener('click', function(e) {
     if (this.textContent === 'Not Returned') {

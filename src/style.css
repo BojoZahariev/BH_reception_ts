@@ -248,10 +248,8 @@ body {
 
 #colleaguesList,
 #visitorsList {
-  background-color: #fcfcfc;
   color: #222;
   list-style: none;
-  border: 1px solid #ffc220;
 
   display: flex;
   flex-direction: column-reverse;
@@ -259,6 +257,7 @@ body {
 
 .colleaguesListPart {
   display: flex;
+  background-color: #fcfcfc;
   justify-content: center;
   border-bottom: 1px solid #ffc220;
   padding: 5px;
@@ -329,4 +328,8 @@ body {
   text-align: center;
   background-color: #76c043;
   border: 1px solid #ffc220;
+}
+
+.lastLi {
+  margin-bottom: 10px;
 }
