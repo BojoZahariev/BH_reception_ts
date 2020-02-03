@@ -29,11 +29,13 @@ const visitorsBtn = document.querySelector('#visitorsBtn');
 const backBtn = document.querySelector('#backBtn');
 const colleaguesListBtn = document.querySelector('#colleaguesListBtn');
 const visitorsListBtn = document.querySelector('#visitorsListBtn');
+/*
 const passwordDiv = document.querySelector('#passwordDiv');
 const inputPassword = document.querySelector('#inputPassword');
 const passwordSubmit = document.querySelector('#passwordSubmit');
 const passwordMsg = document.querySelector('#passwordMsg');
 const passwordForm = document.querySelector('#passwordForm');
+*/
 const tyDiv = document.querySelector('#tyDiv');
 
 colleaguesBtn.addEventListener('click', function(e) {
@@ -55,7 +57,6 @@ colleaguesListBtn.addEventListener('click', function(e) {
   visitorsDiv.style.display = 'none';
   colleaguesDiv.style.display = 'none';
   visitorsListDiv.style.display = 'none';
-
   colleaguesListDiv.style.display = 'block';
   backBtn.style.display = 'block';
 });
@@ -65,10 +66,39 @@ visitorsListBtn.addEventListener('click', function(e) {
   visitorsDiv.style.display = 'none';
   colleaguesDiv.style.display = 'none';
   colleaguesListDiv.style.display = 'none';
-
   visitorsListDiv.style.display = 'block';
   backBtn.style.display = 'block';
 });
+
+/*
+const passwordCheck = () => {
+  console.log('ding');
+  const passwordDiv = document.createElement('div');
+  passwordDiv.classList.add('passwordDiv');
+  document.body.appendChild(passwordDiv);
+
+  const passwordForm = document.createElement('form');
+  passwordDiv.appendChild(passwordForm);
+
+  const inputPassword = document.createElement('input');
+  passwordForm.appendChild(inputPassword);
+
+  const passwordSubmit = document.createElement('p');
+  passwordSubmit.textContent = 'Submit';
+  passwordDiv.appendChild(passwordSubmit);
+
+  let a;
+  passwordSubmit.addEventListener('click', function(e) {
+    if (inputPassword.value === 'bh') {
+      a = true;
+    } else {
+      a = false;
+    }
+  });
+
+  return a;
+};
+*/
 
 backBtn.addEventListener('click', function(e) {
   backToInitial();
@@ -138,23 +168,10 @@ const render = item => {
   });
 
   deleteBtn.addEventListener('click', function(e) {
-    passwordDiv.style.display = 'block';
-    passwordSubmit.addEventListener('click', function(e) {
-      if (inputPassword.value === 'bh') {
-        let div = deleteBtn.parentElement;
-        div.style.display = 'none';
-        ipcRenderer.send('deleteItem', { item });
-        passwordDiv.style.display = 'none';
-        passwordForm.reset();
-      } else {
-        passwordMsg.textContent = 'Wrong password';
-        passwordForm.reset();
-        setTimeout(function() {
-          passwordDiv.style.display = 'none';
-          passwordMsg.textContent = 'Enter password';
-        }, 1500);
-      }
-    });
+    let div = deleteBtn.parentElement;
+    div.style.display = 'none';
+    ipcRenderer.send('deleteItem', { item });
+    console.log(item);
   });
 
   list.appendChild(li);
@@ -197,22 +214,9 @@ const renderVisitors = item => {
   li.appendChild(deleteBtn);
 
   deleteBtn.addEventListener('click', function(e) {
-    passwordDiv.style.display = 'block';
-    passwordSubmit.addEventListener('click', function(e) {
-      if (inputPassword.value === 'bh') {
-        let div = deleteBtn.parentElement;
-        div.style.display = 'none';
-        ipcRenderer.send('deleteItem', { item });
-        passwordDiv.style.display = 'none';
-      } else {
-        passwordMsg.textContent = 'Wrong password';
-        passwordForm.reset();
-        setTimeout(function() {
-          passwordDiv.style.display = 'none';
-          passwordMsg.textContent = 'Enter password';
-        }, 1500);
-      }
-    });
+    let div = deleteBtn.parentElement;
+    div.style.display = 'none';
+    ipcRenderer.send('deleteItem', { item });
   });
 
   visitorsList.appendChild(li);
