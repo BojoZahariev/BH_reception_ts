@@ -1,2 +1,10 @@
-{"card":"11","date":"03/02/2020 00:54","firstName":"rr","id":1580691265770,"lastName":"rr","note":"Click to add","returned":"Not Returned","type":"colleagues","_id":"7w0PgLIlKctdUQ96"}
-{"$$deleted":true,"_id":"7w0PgLIlKctdUQ96"}
+{"company":"ssss","date":"03/02/2020 11:19","firstName":"ss","id":1580728782843,"lastName":"ssss","type":"visitors","visiting":"sssssssss","_id":"94QbxiMph7AhS2Bx"}
+{"id":1580728842204,"firstName":"bbb","lastName":"bbb","card":"66","date":"03/02/2020 11:20","returned":"Returned","note":"Click to add","type":"colleagues","_id":"NGkEcXFwhgZDNFp8"}
+{"card":"11","date":"03/02/2020 11:21","firstName":"aaa","id":1580728902508,"lastName":"aa","note":"Click to add","returned":"Not Returned","type":"colleagues","_id":"Y2iSWmJ4C2rCtx58"}
+{"id":1580728814963,"firstName":"ccc","lastName":"ce","card":"1","date":"03/02/2020 11:20","returned":"Returned","note":"Click to add","type":"colleagues","_id":"cgYTVeVKbTs9SXZF"}
+{"id":1580728727088,"firstName":"sss","lastName":"ss","card":"77","date":"03/02/2020 11:18","returned":"Returned","note":"Click to add","type":"colleagues","_id":"dNsKwkRZMLZD4n2w"}
+{"card":"11","date":"03/02/2020 11:22","firstName":"sss","id":1580728928419,"lastName":"sss","note":"Click to add","returned":"Not Returned","type":"colleagues","_id":"ecIWByKYLMwg5Dvl"}
+{"card":"77","date":"03/02/2020 11:21","firstName":"fff","id":1580728881371,"lastName":"ff","note":"Click to add","returned":"Not Returned","type":"colleagues","_id":"fZk3Jfi5uVkqxMDT"}
+{"id":1580728699779,"firstName":"ccc","lastName":"ccc","card":"11","date":"03/02/2020 11:18","returned":"Returned","note":"Click to add","type":"colleagues","_id":"gATDifWxCNGqffF4"}
+{"company":"xxx","date":"03/02/2020 11:23","firstName":"xx","id":1580728982544,"lastName":"xxx","type":"visitors","visiting":"xxxx","_id":"m5I5xgQ3DKO6j1qI"}
+{"card":"33","date":"03/02/2020 11:22","firstName":"www","id":1580728967594,"lastName":"www","note":"Click to add","returned":"Not Returned","type":"colleagues","_id":"o67gZQB7GBtCZwRk"}

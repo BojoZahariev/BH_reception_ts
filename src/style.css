@@ -302,8 +302,7 @@ body {
   cursor: pointer;
 }
 
-#passwordDiv {
-  display: none;
+.passwordDiv {
   position: fixed;
   top: 10px;
   left: 50%;
@@ -321,14 +320,13 @@ body {
   position: absolute;
   top: 20%;
   left: 50%;
-  padding: 80px;
+  padding: 20px;
+  width: 500px;
+  height: 400px;
+  line-height: 100px;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
   text-align: center;
   background-color: #76c043;
   border: 1px solid #ffc220;
-}
-
-.tyTitle {
-  padding: 0;
 }

@@ -29,13 +29,6 @@ const visitorsBtn = document.querySelector('#visitorsBtn');
 const backBtn = document.querySelector('#backBtn');
 const colleaguesListBtn = document.querySelector('#colleaguesListBtn');
 const visitorsListBtn = document.querySelector('#visitorsListBtn');
-/*
-const passwordDiv = document.querySelector('#passwordDiv');
-const inputPassword = document.querySelector('#inputPassword');
-const passwordSubmit = document.querySelector('#passwordSubmit');
-const passwordMsg = document.querySelector('#passwordMsg');
-const passwordForm = document.querySelector('#passwordForm');
-*/
 const tyDiv = document.querySelector('#tyDiv');
 
 colleaguesBtn.addEventListener('click', function(e) {
@@ -53,50 +46,109 @@ visitorsBtn.addEventListener('click', function(e) {
 });
 
 colleaguesListBtn.addEventListener('click', function(e) {
-  initialDiv.style.display = 'none';
-  visitorsDiv.style.display = 'none';
-  colleaguesDiv.style.display = 'none';
-  visitorsListDiv.style.display = 'none';
-  colleaguesListDiv.style.display = 'block';
-  backBtn.style.display = 'block';
+  let passwordDiv = document.createElement('div');
+  passwordDiv.classList.add('passwordDiv');
+  document.body.appendChild(passwordDiv);
+  let passwordMsg = document.createElement('p');
+  passwordMsg.textContent = 'Enter password';
+  passwordDiv.appendChild(passwordMsg);
+  let passwordForm = document.createElement('form');
+  passwordDiv.appendChild(passwordForm);
+  let inputPassword = document.createElement('input');
+  inputPassword.type = 'text';
+  inputPassword.autofocus = true;
+  inputPassword.classList.add('inputs');
+  passwordForm.appendChild(inputPassword);
+  let passwordSubmit = document.createElement('p');
+  passwordSubmit.textContent = 'Submit';
+
+  passwordSubmit.classList.add('submitBtn');
+  passwordDiv.appendChild(passwordSubmit);
+
+  passwordSubmit.addEventListener('click', e => {
+    e.preventDefault();
+    if (inputPassword.value === 'bh') {
+      initialDiv.style.display = 'none';
+      visitorsDiv.style.display = 'none';
+      colleaguesDiv.style.display = 'none';
+      visitorsListDiv.style.display = 'none';
+      colleaguesListDiv.style.display = 'block';
+      backBtn.style.display = 'block';
+
+      passwordDiv.style.display = 'none';
+    } else {
+      passwordMsg.textContent = 'Wrong password';
+      passwordForm.reset();
+      setTimeout(function() {
+        passwordDiv.style.display = 'none';
+        passwordMsg.textContent = 'Enter password';
+      }, 1500);
+    }
+  });
 });
 
 visitorsListBtn.addEventListener('click', function(e) {
-  initialDiv.style.display = 'none';
-  visitorsDiv.style.display = 'none';
-  colleaguesDiv.style.display = 'none';
-  colleaguesListDiv.style.display = 'none';
-  visitorsListDiv.style.display = 'block';
-  backBtn.style.display = 'block';
+  let passwordDiv = document.createElement('div');
+  passwordDiv.classList.add('passwordDiv');
+  document.body.appendChild(passwordDiv);
+  let passwordMsg = document.createElement('p');
+  passwordMsg.textContent = 'Enter password';
+  passwordDiv.appendChild(passwordMsg);
+  let passwordForm = document.createElement('form');
+  passwordDiv.appendChild(passwordForm);
+  let inputPassword = document.createElement('input');
+  inputPassword.type = 'text';
+  inputPassword.autofocus = true;
+  inputPassword.classList.add('inputs');
+  passwordForm.appendChild(inputPassword);
+  let passwordSubmit = document.createElement('p');
+  passwordSubmit.textContent = 'Submit';
+
+  passwordSubmit.classList.add('submitBtn');
+  passwordDiv.appendChild(passwordSubmit);
+
+  passwordSubmit.addEventListener('click', e => {
+    e.preventDefault();
+    if (inputPassword.value === 'bh') {
+      initialDiv.style.display = 'none';
+      visitorsDiv.style.display = 'none';
+      colleaguesDiv.style.display = 'none';
+      colleaguesListDiv.style.display = 'none';
+      visitorsListDiv.style.display = 'block';
+      backBtn.style.display = 'block';
+      passwordDiv.style.display = 'none';
+    } else {
+      passwordMsg.textContent = 'Wrong password';
+      passwordForm.reset();
+      setTimeout(function() {
+        passwordDiv.style.display = 'none';
+        passwordMsg.textContent = 'Enter password';
+      }, 1500);
+    }
+  });
 });
 
 /*
 const passwordCheck = () => {
-  console.log('ding');
-  const passwordDiv = document.createElement('div');
+  let passwordDiv = document.createElement('div');
   passwordDiv.classList.add('passwordDiv');
   document.body.appendChild(passwordDiv);
-
-  const passwordForm = document.createElement('form');
+  let passwordMsg = document.createElement('p');
+  passwordMsg.textContent = 'Enter password';
+  passwordDiv.appendChild(passwordMsg);
+  let passwordForm = document.createElement('form');
   passwordDiv.appendChild(passwordForm);
-
-  const inputPassword = document.createElement('input');
+  let inputPassword = document.createElement('input');
+  inputPassword.type = 'text';
+  inputPassword.autofocus = true;
+  inputPassword.classList.add('inputs');
   passwordForm.appendChild(inputPassword);
-
-  const passwordSubmit = document.createElement('p');
+  let passwordSubmit = document.createElement('p');
   passwordSubmit.textContent = 'Submit';
+
+  passwordSubmit.classList.add('submitBtn');
   passwordDiv.appendChild(passwordSubmit);
-
-  let a;
-  passwordSubmit.addEventListener('click', function(e) {
-    if (inputPassword.value === 'bh') {
-      a = true;
-    } else {
-      a = false;
-    }
-  });
-
-  return a;
+  return passwordSubmit, inputPassword.value;
 };
 */
 
@@ -326,7 +378,24 @@ ipcRenderer.on('added', (e, item) => {
 
 //Catches ClearAll from menu, asks for a password and sends the event to server to clear the db.
 ipcRenderer.on('clearAll', () => {
-  passwordDiv.style.display = 'block';
+  let passwordDiv = document.createElement('div');
+  passwordDiv.classList.add('passwordDiv');
+  document.body.appendChild(passwordDiv);
+  let passwordMsg = document.createElement('p');
+  passwordMsg.textContent = 'Enter password';
+  passwordDiv.appendChild(passwordMsg);
+  let passwordForm = document.createElement('form');
+  passwordDiv.appendChild(passwordForm);
+  let inputPassword = document.createElement('input');
+  inputPassword.type = 'text';
+  inputPassword.autofocus = true;
+  inputPassword.classList.add('inputs');
+  passwordForm.appendChild(inputPassword);
+  let passwordSubmit = document.createElement('p');
+  passwordSubmit.textContent = 'Submit';
+
+  passwordSubmit.classList.add('submitBtn');
+  passwordDiv.appendChild(passwordSubmit);
   passwordSubmit.addEventListener('click', function(e) {
     if (inputPassword.value === 'bh') {
       ipcRenderer.send('clearAll');
@@ -357,7 +426,7 @@ const playSound = status => {
     tyDiv.style.display = 'block';
     setTimeout(function() {
       tyDiv.style.display = 'none';
-    }, 2500);
+    }, 2000);
   } else if (status === 'fail') {
     sound2.play();
   }
