@@ -95,3 +95,20 @@ ipcMain.on('updateItemNotReturned', (e, item) => {
     {}
   );
 });
+
+ipcMain.on('updateNote', (e, item, noteValue) => {
+  db.update(
+    { id: item.item.id },
+    {
+      id: item.item.id,
+      firstName: item.item.firstName,
+      lastName: item.item.lastName,
+      card: item.item.card,
+      date: item.item.date,
+      returned: item.item.returned,
+      note: item.noteValue,
+      type: 'colleagues'
+    },
+    {}
+  );
+});

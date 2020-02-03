@@ -30,6 +30,7 @@ const backBtn = document.querySelector('#backBtn');
 const colleaguesListBtn = document.querySelector('#colleaguesListBtn');
 const visitorsListBtn = document.querySelector('#visitorsListBtn');
 const tyDiv = document.querySelector('#tyDiv');
+//store the previous date so it knows when to break the list
 var lastDate;
 
 colleaguesBtn.addEventListener('click', function(e) {
@@ -62,9 +63,16 @@ colleaguesListBtn.addEventListener('click', function(e) {
   passwordForm.appendChild(inputPassword);
   let passwordSubmit = document.createElement('p');
   passwordSubmit.textContent = 'Submit';
-
   passwordSubmit.classList.add('submitBtn');
   passwordDiv.appendChild(passwordSubmit);
+  let close = document.createElement('p');
+  close.textContent = 'close';
+  close.classList.add('close');
+  passwordDiv.appendChild(close);
+
+  close.addEventListener('click', e => {
+    passwordDiv.style.display = 'none';
+  });
 
   passwordSubmit.addEventListener('click', e => {
     e.preventDefault();
@@ -104,9 +112,17 @@ visitorsListBtn.addEventListener('click', function(e) {
   passwordForm.appendChild(inputPassword);
   let passwordSubmit = document.createElement('p');
   passwordSubmit.textContent = 'Submit';
-
   passwordSubmit.classList.add('submitBtn');
   passwordDiv.appendChild(passwordSubmit);
+
+  let close = document.createElement('p');
+  close.textContent = 'close';
+  close.classList.add('close');
+  passwordDiv.appendChild(close);
+
+  close.addEventListener('click', e => {
+    passwordDiv.style.display = 'none';
+  });
 
   passwordSubmit.addEventListener('click', e => {
     e.preventDefault();
@@ -128,30 +144,6 @@ visitorsListBtn.addEventListener('click', function(e) {
     }
   });
 });
-
-/*
-const passwordCheck = () => {
-  let passwordDiv = document.createElement('div');
-  passwordDiv.classList.add('passwordDiv');
-  document.body.appendChild(passwordDiv);
-  let passwordMsg = document.createElement('p');
-  passwordMsg.textContent = 'Enter password';
-  passwordDiv.appendChild(passwordMsg);
-  let passwordForm = document.createElement('form');
-  passwordDiv.appendChild(passwordForm);
-  let inputPassword = document.createElement('input');
-  inputPassword.type = 'text';
-  inputPassword.autofocus = true;
-  inputPassword.classList.add('inputs');
-  passwordForm.appendChild(inputPassword);
-  let passwordSubmit = document.createElement('p');
-  passwordSubmit.textContent = 'Submit';
-
-  passwordSubmit.classList.add('submitBtn');
-  passwordDiv.appendChild(passwordSubmit);
-  return passwordSubmit, inputPassword.value;
-};
-*/
 
 backBtn.addEventListener('click', function(e) {
   backToInitial();
@@ -195,32 +187,73 @@ const render = item => {
   returnedCheck.textContent = item.returned;
   returnedCheck.classList.add('names');
   returnedCheck.classList.add('returned');
+  if (item.returned === 'Returned') {
+    returnedCheck.style.color = '#76c043';
+  } else {
+    returnedCheck.style.color = 'red';
+  }
+
   li.appendChild(returnedCheck);
 
   const note = document.createElement('p');
   note.textContent = item.note;
   note.classList.add('names');
+  note.classList.add('notes');
   note.classList.add('listInput');
   li.appendChild(note);
+
+  //add note
+  note.addEventListener('click', function(e) {
+    let noteDiv = document.createElement('div');
+    noteDiv.classList.add('passwordDiv');
+    document.body.appendChild(noteDiv);
+    let noteMsg = document.createElement('p');
+    noteMsg.textContent = 'Write a note';
+    noteDiv.appendChild(noteMsg);
+    let noteForm = document.createElement('form');
+    noteDiv.appendChild(noteForm);
+    let inputNote = document.createElement('input');
+    inputNote.type = 'text';
+    inputNote.autofocus = true;
+    inputNote.classList.add('inputs');
+    noteForm.appendChild(inputNote);
+    let noteSubmit = document.createElement('p');
+    noteSubmit.textContent = 'Submit';
+
+    noteSubmit.classList.add('submitBtn');
+    noteDiv.appendChild(noteSubmit);
+
+    noteSubmit.addEventListener('click', e => {
+      e.preventDefault();
+      if (inputNote.value !== '') {
+        note.textContent = inputNote.value;
+        let noteValue = inputNote.value;
+        ipcRenderer.send('updateNote', { item, noteValue });
+        noteForm.reset();
+        noteDiv.style.display = 'none';
+      } else {
+        setTimeout(function() {
+          noteDiv.style.display = 'none';
+        }, 1500);
+      }
+    });
+  });
 
   const deleteBtn = document.createElement('p');
   deleteBtn.textContent = 'delete';
   deleteBtn.classList.add('names');
   deleteBtn.classList.add('deleteBtn');
-
-  if (item.date.slice(0, 3) !== lastDate) {
-    li.classList.add('lastLi');
-  }
   li.appendChild(deleteBtn);
-  lastDate = item.date.slice(0, 3);
 
   returnedCheck.addEventListener('click', function(e) {
     if (this.textContent === 'Not Returned') {
       ipcRenderer.send('updateItemReturned', { item });
       this.textContent = 'Returned';
+      this.style.color = '#76c043';
     } else if (this.textContent === 'Returned') {
       ipcRenderer.send('updateItemNotReturned', { item });
       this.textContent = 'Not Returned';
+      this.style.color = 'red';
     }
   });
 
@@ -228,8 +261,13 @@ const render = item => {
     let div = deleteBtn.parentElement;
     div.style.display = 'none';
     ipcRenderer.send('deleteItem', { item });
-    console.log(item);
   });
+
+  //set the gap between the dates
+  if (item.date.slice(0, 3) !== lastDate) {
+    li.classList.add('lastLi');
+  }
+  lastDate = item.date.slice(0, 3);
 
   list.appendChild(li);
 };
@@ -324,6 +362,7 @@ colleaguesSubmit.addEventListener('click', e => {
     form.reset();
   } else {
     playSound('fail');
+    fail();
   }
 });
 
@@ -362,8 +401,24 @@ visitorsSubmit.addEventListener('click', e => {
     visitorsForm.reset();
   } else {
     playSound('fail');
+    fail();
   }
 });
+
+//show message if the form is not filled
+const fail = () => {
+  let noteDiv = document.createElement('div');
+  noteDiv.classList.add('passwordDiv');
+  document.body.appendChild(noteDiv);
+  let noteMsg = document.createElement('p');
+  noteMsg.classList.add('smallTitle');
+  noteMsg.textContent = 'Please use full names';
+  noteDiv.appendChild(noteMsg);
+
+  setTimeout(function() {
+    noteDiv.style.display = 'none';
+  }, 2000);
+};
 
 const addZero = i => {
   if (i < 10) {
@@ -398,6 +453,15 @@ ipcRenderer.on('clearAll', () => {
   passwordForm.appendChild(inputPassword);
   let passwordSubmit = document.createElement('p');
   passwordSubmit.textContent = 'Submit';
+
+  let close = document.createElement('p');
+  close.textContent = 'close';
+  close.classList.add('close');
+  passwordDiv.appendChild(close);
+
+  close.addEventListener('click', e => {
+    passwordDiv.style.display = 'none';
+  });
 
   passwordSubmit.classList.add('submitBtn');
   passwordDiv.appendChild(passwordSubmit);

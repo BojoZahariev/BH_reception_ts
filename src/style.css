@@ -153,23 +153,6 @@ body {
   width: 100px;
 }
 
-.blink {
-  animation: blinking 0.5s step-end infinite alternate;
-  -webkit-animation: blinking 0.5s step-end infinite alternate;
-}
-
-@keyframes blinking {
-  50% {
-    border-color: #bb4430;
-  }
-}
-
-@-webkit-keyframes blinking {
-  50% {
-    border-color: #bb4430;
-  }
-}
-
 .submitBtn {
   display: inline-block;
   padding: 8px 10px;
@@ -250,7 +233,6 @@ body {
 #visitorsList {
   color: #222;
   list-style: none;
-
   display: flex;
   flex-direction: column-reverse;
 }
@@ -314,6 +296,14 @@ body {
   color: #222;
 }
 
+.close {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  cursor: pointer;
+  color: #222;
+}
+
 #tyDiv {
   display: none;
   position: absolute;
@@ -332,4 +322,9 @@ body {
 
 .lastLi {
   margin-bottom: 10px;
+}
+
+.notes {
+  text-transform: uppercase;
+  cursor: pointer;
 }
