@@ -61,7 +61,8 @@ colleaguesListBtn.addEventListener('click', function(e) {
   inputPassword.autofocus = true;
   inputPassword.classList.add('inputs');
   passwordForm.appendChild(inputPassword);
-  let passwordSubmit = document.createElement('p');
+  let passwordSubmit = document.createElement('button');
+  passwordSubmit.type = 'submit';
   passwordSubmit.textContent = 'Submit';
   passwordSubmit.classList.add('submitBtn');
   passwordDiv.appendChild(passwordSubmit);
@@ -74,7 +75,7 @@ colleaguesListBtn.addEventListener('click', function(e) {
     passwordDiv.style.display = 'none';
   });
 
-  passwordSubmit.addEventListener('click', e => {
+  passwordForm.addEventListener('submit', e => {
     e.preventDefault();
     if (inputPassword.value === 'bh') {
       initialDiv.style.display = 'none';
@@ -110,7 +111,8 @@ visitorsListBtn.addEventListener('click', function(e) {
   inputPassword.autofocus = true;
   inputPassword.classList.add('inputs');
   passwordForm.appendChild(inputPassword);
-  let passwordSubmit = document.createElement('p');
+  let passwordSubmit = document.createElement('button');
+  passwordSubmit.type = 'submit';
   passwordSubmit.textContent = 'Submit';
   passwordSubmit.classList.add('submitBtn');
   passwordDiv.appendChild(passwordSubmit);
@@ -124,7 +126,7 @@ visitorsListBtn.addEventListener('click', function(e) {
     passwordDiv.style.display = 'none';
   });
 
-  passwordSubmit.addEventListener('click', e => {
+  passwordForm.addEventListener('submit', e => {
     e.preventDefault();
     if (inputPassword.value === 'bh') {
       initialDiv.style.display = 'none';
@@ -217,13 +219,14 @@ const render = item => {
     inputNote.autofocus = true;
     inputNote.classList.add('inputs');
     noteForm.appendChild(inputNote);
-    let noteSubmit = document.createElement('p');
+    let noteSubmit = document.createElement('button');
+    noteSubmit.type = 'submit';
     noteSubmit.textContent = 'Submit';
 
     noteSubmit.classList.add('submitBtn');
     noteDiv.appendChild(noteSubmit);
 
-    noteSubmit.addEventListener('click', e => {
+    noteForm.addEventListener('submit', e => {
       e.preventDefault();
       if (inputNote.value !== '') {
         note.textContent = inputNote.value;
@@ -332,7 +335,7 @@ ipcRenderer.on('loaded', (e, items) =>
 );
 
 //Send Item to the server
-colleaguesSubmit.addEventListener('click', e => {
+form.addEventListener('submit', e => {
   e.preventDefault();
 
   if (item.value.length > 1 && item2.value.length > 1 && item3.value.length > 0) {
@@ -366,7 +369,7 @@ colleaguesSubmit.addEventListener('click', e => {
   }
 });
 
-visitorsSubmit.addEventListener('click', e => {
+visitorsForm.addEventListener('submit', e => {
   e.preventDefault();
 
   if (
@@ -451,8 +454,11 @@ ipcRenderer.on('clearAll', () => {
   inputPassword.autofocus = true;
   inputPassword.classList.add('inputs');
   passwordForm.appendChild(inputPassword);
-  let passwordSubmit = document.createElement('p');
+  let passwordSubmit = document.createElement('button');
+  passwordSubmit.type = 'submit';
   passwordSubmit.textContent = 'Submit';
+  passwordSubmit.classList.add('submitBtn');
+  passwordDiv.appendChild(passwordSubmit);
 
   let close = document.createElement('p');
   close.textContent = 'close';
@@ -463,12 +469,13 @@ ipcRenderer.on('clearAll', () => {
     passwordDiv.style.display = 'none';
   });
 
-  passwordSubmit.classList.add('submitBtn');
-  passwordDiv.appendChild(passwordSubmit);
-  passwordSubmit.addEventListener('click', function(e) {
-    if (inputPassword.value === 'bh') {
+  passwordForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    if (inputPassword.value === 'bhadmin') {
       ipcRenderer.send('clearAll');
       passwordDiv.style.display = 'none';
+      passwordForm.reset();
     } else {
       passwordMsg.textContent = 'Wrong password';
       passwordForm.reset();
