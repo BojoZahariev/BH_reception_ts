@@ -161,6 +161,34 @@ const backToInitial = () => {
   visitorsListDiv.style.display = 'none';
 };
 
+//set the date format
+const getToday = () => {
+  let dateObj = new Date();
+  let month = addZero(dateObj.getMonth() + 1);
+  let day = addZero(dateObj.getDate());
+  let year = dateObj.getFullYear();
+  let hours = addZero(dateObj.getHours());
+  let minutes = addZero(dateObj.getMinutes());
+
+  issueDate = day + '/' + month + '/' + year + ' ' + hours + ':' + minutes;
+
+  return issueDate;
+};
+
+//get yesterday date
+const getYesterday = () => {
+  let today = new Date();
+  let yesterday = new Date(today);
+  yesterday.setDate(today.getDate() - 1);
+  var dd = addZero(yesterday.getDate());
+  var mm = addZero(yesterday.getMonth() + 1); //January is 0!
+  var yyyy = yesterday.getFullYear();
+
+  yesterday = dd + '/' + mm + '/' + yyyy;
+
+  return yesterday;
+};
+
 //Render colleagues
 const render = item => {
   const li = document.createElement('li');
@@ -223,9 +251,17 @@ const render = item => {
     let noteSubmit = document.createElement('button');
     noteSubmit.type = 'submit';
     noteSubmit.textContent = 'Submit';
-
     noteSubmit.classList.add('submitBtn');
-    noteDiv.appendChild(noteSubmit);
+    noteForm.appendChild(noteSubmit);
+
+    let close = document.createElement('p');
+    close.textContent = 'close';
+    close.classList.add('close');
+    noteDiv.appendChild(close);
+
+    close.addEventListener('click', e => {
+      noteDiv.style.display = 'none';
+    });
 
     noteForm.addEventListener('submit', e => {
       e.preventDefault();
@@ -270,11 +306,8 @@ const render = item => {
   //set the gap between the dates
   if (item.date.slice(0, 3) !== lastDate) {
     li.classList.add('lastLi');
-    stop += 1;
   }
   lastDate = item.date.slice(0, 3);
-
-  //display only today and yesterday
 
   list.appendChild(li);
 
@@ -323,6 +356,12 @@ const renderVisitors = item => {
     ipcRenderer.send('deleteItem', { item });
   });
 
+  //set the gap between the dates
+  if (item.date.slice(0, 3) !== lastDate) {
+    li.classList.add('lastLi');
+  }
+  lastDate = item.date.slice(0, 3);
+
   visitorsList.appendChild(li);
 };
 
@@ -332,34 +371,20 @@ window.addEventListener('load', () => ipcRenderer.send('loadAll'));
 
 ipcRenderer.on('loaded', (e, items) =>
   items.forEach(function(item) {
-    if (item.type === 'colleagues') {
+    //send for display only today and yesterday
+    if (
+      item.type === 'colleagues' &&
+      (item.date.slice(0, 10) === getToday().slice(0, 10) || item.date.slice(0, 10) === getYesterday().slice(0, 10))
+    ) {
       render(item);
-    } else {
+    } else if (
+      item.type === 'visitors' &&
+      (item.date.slice(0, 10) === getToday().slice(0, 10) || item.date.slice(0, 10) === getYesterday().slice(0, 10))
+    ) {
       renderVisitors(item);
     }
   })
 );
-
-//set the date format
-const getToday = () => {
-  let dateObj = new Date();
-  let month = addZero(dateObj.getMonth() + 1);
-  let day = addZero(dateObj.getDate());
-  let year = dateObj.getFullYear();
-  let hours = addZero(dateObj.getHours());
-  let minutes = addZero(dateObj.getMinutes());
-
-  issueDate = day + '/' + month + '/' + year + ' ' + hours + ':' + minutes;
-
-  return issueDate;
-};
-
-//get yesterday date
-const yesterday = () => {
-  var yesterday = new Date(Date.now() - 86400000);
-
-  return yesterday;
-};
 
 //Send Item to the server
 form.addEventListener('submit', e => {
