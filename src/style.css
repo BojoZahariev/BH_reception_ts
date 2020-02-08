@@ -230,7 +230,7 @@ body {
 #colleaguesListDiv,
 #visitorsListDiv {
   display: none;
-  width: 90%;
+  width: 95%;
   margin: auto;
   padding: 10px;
 }
@@ -267,6 +267,8 @@ body {
 
 .deleteBtn {
   flex-basis: 80px;
+  max-width: 80px;
+  max-height: 40px;
   display: inline-block;
   padding: 7px 10px;
   background-color: #ffc220;

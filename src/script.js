@@ -32,6 +32,7 @@ const visitorsListBtn = document.querySelector('#visitorsListBtn');
 const tyDiv = document.querySelector('#tyDiv');
 //store the previous date so it knows when to break the list
 var lastDate;
+var stop = 0;
 
 colleaguesBtn.addEventListener('click', function(e) {
   initialDiv.style.display = 'none';
@@ -65,7 +66,7 @@ colleaguesListBtn.addEventListener('click', function(e) {
   passwordSubmit.type = 'submit';
   passwordSubmit.textContent = 'Submit';
   passwordSubmit.classList.add('submitBtn');
-  passwordDiv.appendChild(passwordSubmit);
+  passwordForm.appendChild(passwordSubmit);
   let close = document.createElement('p');
   close.textContent = 'close';
   close.classList.add('close');
@@ -115,7 +116,7 @@ visitorsListBtn.addEventListener('click', function(e) {
   passwordSubmit.type = 'submit';
   passwordSubmit.textContent = 'Submit';
   passwordSubmit.classList.add('submitBtn');
-  passwordDiv.appendChild(passwordSubmit);
+  passwordForm.appendChild(passwordSubmit);
 
   let close = document.createElement('p');
   close.textContent = 'close';
@@ -160,7 +161,7 @@ const backToInitial = () => {
   visitorsListDiv.style.display = 'none';
 };
 
-//Render Items to Screen
+//Render colleagues
 const render = item => {
   const li = document.createElement('li');
   li.classList.add('colleaguesListPart');
@@ -269,10 +270,15 @@ const render = item => {
   //set the gap between the dates
   if (item.date.slice(0, 3) !== lastDate) {
     li.classList.add('lastLi');
+    stop += 1;
   }
   lastDate = item.date.slice(0, 3);
 
+  //display only today and yesterday
+
   list.appendChild(li);
+
+  //console.log(list.getElementsByTagName('li').length);
 };
 
 //render visitors
@@ -334,24 +340,35 @@ ipcRenderer.on('loaded', (e, items) =>
   })
 );
 
+//set the date format
+const getToday = () => {
+  let dateObj = new Date();
+  let month = addZero(dateObj.getMonth() + 1);
+  let day = addZero(dateObj.getDate());
+  let year = dateObj.getFullYear();
+  let hours = addZero(dateObj.getHours());
+  let minutes = addZero(dateObj.getMinutes());
+
+  issueDate = day + '/' + month + '/' + year + ' ' + hours + ':' + minutes;
+
+  return issueDate;
+};
+
+//get yesterday date
+const yesterday = () => {
+  var yesterday = new Date(Date.now() - 86400000);
+
+  return yesterday;
+};
+
 //Send Item to the server
 form.addEventListener('submit', e => {
   e.preventDefault();
 
   if (item.value.length > 1 && item2.value.length > 1 && item3.value.length > 0) {
-    //set the date format
-    let dateObj = new Date();
-    let month = addZero(dateObj.getMonth() + 1);
-    let day = addZero(dateObj.getDate());
-    let year = dateObj.getFullYear();
-    let hours = addZero(dateObj.getHours());
-    let minutes = addZero(dateObj.getMinutes());
-
-    issueDate = day + '/' + month + '/' + year + ' ' + hours + ':' + minutes;
-
     ipcRenderer.send('addItem', {
       id: Date.now(),
-      date: issueDate,
+      date: getToday(),
       firstName: item.value,
       lastName: item2.value,
       card: item3.value,
@@ -378,19 +395,9 @@ visitorsForm.addEventListener('submit', e => {
     visitorsItem3.value.length > 1 &&
     visitorsItem4.value.length > 1
   ) {
-    //set the date format
-    let dateObj = new Date();
-    let month = addZero(dateObj.getMonth() + 1);
-    let day = addZero(dateObj.getDate());
-    let year = dateObj.getFullYear();
-    let hours = addZero(dateObj.getHours());
-    let minutes = addZero(dateObj.getMinutes());
-
-    issueDate = day + '/' + month + '/' + year + ' ' + hours + ':' + minutes;
-
     ipcRenderer.send('addItem', {
       id: Date.now(),
-      date: issueDate,
+      date: getToday(),
       firstName: visitorsItem.value,
       lastName: visitorsItem2.value,
       company: visitorsItem3.value,
@@ -458,7 +465,7 @@ ipcRenderer.on('clearAll', () => {
   passwordSubmit.type = 'submit';
   passwordSubmit.textContent = 'Submit';
   passwordSubmit.classList.add('submitBtn');
-  passwordDiv.appendChild(passwordSubmit);
+  passwordForm.appendChild(passwordSubmit);
 
   let close = document.createElement('p');
   close.textContent = 'close';
