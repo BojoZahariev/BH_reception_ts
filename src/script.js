@@ -32,7 +32,6 @@ const visitorsListBtn = document.querySelector('#visitorsListBtn');
 const tyDiv = document.querySelector('#tyDiv');
 //store the previous date so it knows when to break the list
 var lastDate;
-var stop = 0;
 
 colleaguesBtn.addEventListener('click', function(e) {
   initialDiv.style.display = 'none';
@@ -304,8 +303,9 @@ const render = item => {
   });
 
   //set the gap between the dates
-  if (item.date.slice(0, 3) !== lastDate) {
+  if (item.date.slice(0, 3) !== lastDate && list.getElementsByTagName('li').length > 0) {
     li.classList.add('lastLi');
+    console.log(list.getElementsByTagName('li').length);
   }
   lastDate = item.date.slice(0, 3);
 
@@ -539,3 +539,19 @@ const playSound = status => {
     sound2.play();
   }
 };
+
+const fireTest = () => {
+  const fireTestText = document.getElementsByClassName('fire');
+  const day = new Date();
+  const day1 = day.getDay();
+  // Sunday - Saturday : 0 - 6
+  if (day1 === 3) {
+    fireTestText[0].style.display = 'block';
+    fireTestText[1].style.display = 'block';
+  } else {
+    fireTestText[0].style.display = 'none';
+    fireTestText[1].style.display = 'none';
+  }
+};
+
+fireTest();
