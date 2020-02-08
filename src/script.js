@@ -30,6 +30,9 @@ const backBtn = document.querySelector('#backBtn');
 const colleaguesListBtn = document.querySelector('#colleaguesListBtn');
 const visitorsListBtn = document.querySelector('#visitorsListBtn');
 const tyDiv = document.querySelector('#tyDiv');
+const archiveDiv = document.querySelector('#archiveDiv');
+const archiveBtn = document.querySelector('#archiveBtn');
+
 //store the previous date so it knows when to break the list
 var lastDate;
 
@@ -84,7 +87,7 @@ colleaguesListBtn.addEventListener('click', function(e) {
       visitorsListDiv.style.display = 'none';
       colleaguesListDiv.style.display = 'block';
       backBtn.style.display = 'block';
-
+      archiveDiv.style.display = 'none';
       passwordDiv.style.display = 'none';
     } else {
       passwordMsg.textContent = 'Wrong password';
@@ -136,6 +139,7 @@ visitorsListBtn.addEventListener('click', function(e) {
       visitorsListDiv.style.display = 'block';
       backBtn.style.display = 'block';
       passwordDiv.style.display = 'none';
+      archiveDiv.style.display = 'none';
     } else {
       passwordMsg.textContent = 'Wrong password';
       passwordForm.reset();
@@ -158,7 +162,18 @@ const backToInitial = () => {
   backBtn.style.display = 'none';
   colleaguesListDiv.style.display = 'none';
   visitorsListDiv.style.display = 'none';
+  archiveDiv.style.display = 'none';
 };
+
+archiveBtn.addEventListener('click', function(e) {
+  initialDiv.style.display = 'none';
+  visitorsDiv.style.display = 'none';
+  colleaguesDiv.style.display = 'none';
+  backBtn.style.display = 'block';
+  colleaguesListDiv.style.display = 'none';
+  visitorsListDiv.style.display = 'none';
+  archiveDiv.style.display = 'block';
+});
 
 //set the date format
 const getToday = () => {

@@ -348,3 +348,7 @@ body {
   text-transform: uppercase;
   cursor: pointer;
 }
+
+#archiveDiv {
+  display: none;
+}
