@@ -35,6 +35,7 @@ const archiveBtn = document.querySelector('#archiveBtn');
 
 //store the previous date so it knows when to break the list
 var lastDate;
+var lastDateV;
 
 colleaguesBtn.addEventListener('click', function(e) {
   initialDiv.style.display = 'none';
@@ -320,7 +321,6 @@ const render = item => {
   //set the gap between the dates
   if (item.date.slice(0, 3) !== lastDate && list.getElementsByTagName('li').length > 0) {
     li.classList.add('lastLi');
-    console.log(list.getElementsByTagName('li').length);
   }
   lastDate = item.date.slice(0, 3);
 
@@ -372,10 +372,10 @@ const renderVisitors = item => {
   });
 
   //set the gap between the dates
-  if (item.date.slice(0, 3) !== lastDate) {
+  if (item.date.slice(0, 3) !== lastDateV && list.getElementsByTagName('li').length > 0) {
     li.classList.add('lastLi');
   }
-  lastDate = item.date.slice(0, 3);
+  lastDateV = item.date.slice(0, 3);
 
   visitorsList.appendChild(li);
 };
