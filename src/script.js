@@ -30,10 +30,17 @@ const backBtn = document.querySelector('#backBtn');
 const colleaguesListBtn = document.querySelector('#colleaguesListBtn');
 const visitorsListBtn = document.querySelector('#visitorsListBtn');
 const tyDiv = document.querySelector('#tyDiv');
+
+//archive
 const archiveDiv = document.querySelector('#archiveDiv');
 const archiveBtn = document.querySelector('#archiveBtn');
+const archForm = document.querySelector('#archForm');
+const archItem1 = document.querySelector('#archItem1');
+const archItem2 = document.querySelector('#archItem2');
+const archSubmit = document.querySelector('#archSubmit');
+const archText = document.querySelector('#archText');
 
-//store the previous date so it knows when to break the list
+//store the previous date so it knows when to break the lists
 var lastDate;
 var lastDateV;
 
@@ -210,7 +217,7 @@ const render = item => {
   li.classList.add('colleaguesListPart');
 
   const date = document.createElement('p');
-  date.textContent = item.date;
+  date.textContent = item.date + ' ' + item.hour;
   date.classList.add('names');
   li.appendChild(date);
 
@@ -335,7 +342,7 @@ const renderVisitors = item => {
   li.classList.add('colleaguesListPart');
 
   const date = document.createElement('p');
-  date.textContent = item.date;
+  date.textContent = item.date + ' ' + item.hour;
   date.classList.add('names');
   li.appendChild(date);
 
@@ -408,7 +415,8 @@ form.addEventListener('submit', e => {
   if (item.value.length > 1 && item2.value.length > 1 && item3.value.length > 0) {
     ipcRenderer.send('addItem', {
       id: Date.now(),
-      date: getToday(),
+      date: getToday().slice(0, 10),
+      hour: getToday().slice(11, 16),
       firstName: item.value,
       lastName: item2.value,
       card: item3.value,
@@ -437,7 +445,8 @@ visitorsForm.addEventListener('submit', e => {
   ) {
     ipcRenderer.send('addItem', {
       id: Date.now(),
-      date: getToday(),
+      date: getToday().slice(0, 10),
+      hour: getToday().slice(11, 16),
       firstName: visitorsItem.value,
       lastName: visitorsItem2.value,
       company: visitorsItem3.value,
@@ -476,6 +485,16 @@ const addZero = i => {
   }
   return i;
 };
+
+archForm.addEventListener('submit', e => {
+  e.preventDefault();
+  let searchDate = `${archItem1.value.slice(8, 10)}/${archItem1.value.slice(5, 7)}/${archItem1.value.slice(0, 4)}`;
+  let type = 'colleagues';
+  console.log(searchDate, archItem2.value);
+  ipcRenderer.send('findItem', {
+    searchDate
+  });
+});
 
 //Catches Add Item from server
 ipcRenderer.on('added', (e, item) => {

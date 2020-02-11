@@ -352,3 +352,17 @@ body {
 #archiveDiv {
   display: none;
 }
+
+#archItem1 {
+  background: #f1faee url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png) 97% 50%
+    no-repeat;
+}
+
+#archItem1::-webkit-inner-spin-button {
+  display: none;
+}
+
+#archItem1::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  width: 20px;
+}

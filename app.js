@@ -58,10 +58,12 @@ ipcMain.on('clearAll', () => {
   });
 });
 
+//delete item from the db
 ipcMain.on('deleteItem', (e, item) => {
   db.remove({ id: item.item.id }, {});
 });
 
+//update returned
 ipcMain.on('updateItemReturned', (e, item) => {
   db.update(
     { id: item.item.id },
@@ -71,6 +73,7 @@ ipcMain.on('updateItemReturned', (e, item) => {
       lastName: item.item.lastName,
       card: item.item.card,
       date: item.item.date,
+      hour: item.item.hour,
       returned: 'Returned',
       note: item.item.note,
       type: 'colleagues'
@@ -79,6 +82,7 @@ ipcMain.on('updateItemReturned', (e, item) => {
   );
 });
 
+//update not returned
 ipcMain.on('updateItemNotReturned', (e, item) => {
   db.update(
     { id: item.item.id },
@@ -88,6 +92,7 @@ ipcMain.on('updateItemNotReturned', (e, item) => {
       lastName: item.item.lastName,
       card: item.item.card,
       date: item.item.date,
+      hour: item.item.hour,
       returned: 'Not Returned',
       note: item.item.note,
       type: 'colleagues'
@@ -105,10 +110,20 @@ ipcMain.on('updateNote', (e, item, noteValue) => {
       lastName: item.item.lastName,
       card: item.item.card,
       date: item.item.date,
+      hour: item.item.hour,
       returned: item.item.returned,
       note: item.noteValue,
       type: 'colleagues'
     },
     {}
   );
+});
+
+//find
+
+ipcMain.on('findItem', (e, searchDate) => {
+  db.find({ date: searchDate.searchDate }, function(err, docs) {
+    console.log(docs);
+  });
+  console.log(searchDate.searchDate);
 });

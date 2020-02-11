@@ -1,18 +1,14 @@
-{"card":"11","date":"10/02/2020 22:49","firstName":"aaaaaa","id":1581374979115,"lastName":"aaaaaaaaaaa","note":"Click to add","returned":"Not Returned","type":"colleagues","_id":"0YJBx4IMCPaTo3zk"}
 {"company":"xxxxxxxxxxxx","date":"09/02/2020 11:27","firstName":"xxxxxxxxx","id":1581247633481,"lastName":"xxxxxxxxxxx","type":"visitors","visiting":"xxxxxxxxx","_id":"0cMc7U0cdZuVJm79"}
-{"card":"45","date":"10/02/2020 22:49","firstName":"wwwwww","id":1581374986987,"lastName":"wwwwwwwwww","note":"Click to add","returned":"Not Returned","type":"colleagues","_id":"1Z10JZ2kvq3GTFW1"}
 {"id":1580812066228,"firstName":"jjjj","lastName":"jjjjjjjjjj","card":"12","date":"04/02/2020 10:27","returned":"Returned","note":"Click to add","type":"colleagues","_id":"1wYpAJo0TrGtQL3h"}
-{"company":"ssssssss","date":"10/02/2020 22:49","firstName":"sssss","id":1581374997267,"lastName":"sssssssss","type":"visitors","visiting":"ssssssss","_id":"2euJVDAX91yzoNHa"}
 {"company":"ssss","date":"03/02/2020 11:19","firstName":"ss","id":1580728782843,"lastName":"ssss","type":"visitors","visiting":"sssssssss","_id":"94QbxiMph7AhS2Bx"}
-{"company":"aaaaaaa","date":"10/02/2020 22:50","firstName":"aaaaaa","id":1581375017440,"lastName":"aaaaaa","type":"visitors","visiting":"aaaaaaaaa","_id":"B5dDVKmbs24etFKD"}
 {"card":"33","date":"08/02/2020 11:53","firstName":"zzzz","id":1581162809112,"lastName":"zzzzzzzzzzz","note":"Click to add","returned":"Not Returned","type":"colleagues","_id":"BylsSnVZjlAM1adX"}
 {"id":1580970220464,"firstName":"aaa","lastName":"aaaa","card":"33","date":"06/02/2020 06:23","returned":"Not Returned","note":"ssss","type":"colleagues","_id":"EHdnVXG1xnSJw9hw"}
 {"id":1581153452757,"firstName":"vb","lastName":"vb","card":"11","date":"08/02/2020 09:17","returned":"Returned","note":"Click to add","type":"colleagues","_id":"HjzuUCROQX4H63yN"}
-{"company":"ssssssss","date":"10/02/2020 22:50","firstName":"ssssssssss","id":1581375007596,"lastName":"sssssssss","type":"visitors","visiting":"sssssssss","_id":"NPcpGW8bU1OrsXTj"}
 {"company":"sgsgsgsgsgs","date":"05/02/2020 20:13","firstName":"ddvdvvdvddv","id":1580933610086,"lastName":"hdhdhddhdhdhhd","type":"visitors","visiting":"cvcvcvcvc shshshsh","_id":"NhPpQp7D0T3nWHR4"}
 {"id":1580811980848,"firstName":"aaa","lastName":"aaaa","card":"44","date":"04/02/2020 10:26","returned":"Returned","note":"Click to add","type":"colleagues","_id":"QKtsnPgDeW7lVM4x"}
 {"company":"ccccc","date":"08/02/2020 06:32","firstName":"cccccc","id":1581143567074,"lastName":"ccc","type":"visitors","visiting":"cccccccc","_id":"R4nRjqWSSEiXHpEI"}
 {"card":"44","date":"09/02/2020 11:22","firstName":"sssss","id":1581247370346,"lastName":"ssssss","note":"Click to add","returned":"Not Returned","type":"colleagues","_id":"SIzkFxhEQco17TYZ"}
+{"card":"44","date":"11/02/2020","firstName":"aqaqaq","hour":"10:35","id":1581417329552,"lastName":"aqaqaqaq","note":"Click to add","returned":"Not Returned","type":"colleagues","_id":"SMyBp26HD8Fh5mCv"}
 {"card":"12","date":"08/02/2020 11:10","firstName":"ssss","id":1581160200450,"lastName":"sssssssss","note":"Click to add","returned":"Not Returned","type":"colleagues","_id":"SeEWG9wS2Ad6UGrX"}
 {"company":"aaaa","date":"08/02/2020 06:03","firstName":"aaa","id":1581141825812,"lastName":"aaaa","type":"visitors","visiting":"aaaaaaaaaa","_id":"W1K0uX7inNz6Adcx"}
 {"id":1580812085383,"firstName":"aaa","lastName":"aaaa","card":"34","date":"04/02/2020 10:28","returned":"Returned","note":"Click to add","type":"colleagues","_id":"WKV2maHSEHSbkH1C"}
@@ -34,7 +30,6 @@
 {"company":"ssssss","date":"08/02/2020 11:10","firstName":"ssss","id":1581160248118,"lastName":"ssssss","type":"visitors","visiting":"sssssss","_id":"porvqKwE71xCyVgF"}
 {"id":1580768074673,"firstName":"bbbb","lastName":"bbbb","card":"77","date":"03/02/2020 22:14","returned":"Not Returned","note":"pci","type":"colleagues","_id":"rgBSjDJwUytW05xo"}
 {"id":1580933590252,"firstName":"bmbmb","lastName":"cvcvcvcvcvcvc","card":"02","date":"05/02/2020 20:13","returned":"Returned","note":"Click to add","type":"colleagues","_id":"sBVpDC0cXdYa9Xbs"}
-{"card":"32","date":"10/02/2020 22:49","firstName":"xcxcxcxxx","id":1581374971392,"lastName":"xxxxxxxx","note":"Click to add","returned":"Not Returned","type":"colleagues","_id":"tZwN4XL8V11kS9xA"}
 {"id":1581141631483,"firstName":"bnmmeeee","lastName":"efeggegegeeeee","card":"65","date":"08/02/2020 06:00","returned":"Returned","note":"Click to add","type":"colleagues","_id":"tiEe6P0k0PfIkVjX"}
 {"id":1580812025859,"firstName":"aa","lastName":"aa","card":"55","date":"04/02/2020 10:27","returned":"Returned","note":"pci","type":"colleagues","_id":"tmWUqNdUIhxS56wB"}
 {"id":1581141618879,"firstName":"cccc","lastName":"ccccccc","card":"11","date":"08/02/2020 06:00","returned":"Returned","note":"Click to add","type":"colleagues","_id":"uWLwwCBlTCm3CWy7"}
@@ -42,3 +37,6 @@
 {"company":"ddddddddd","date":"09/02/2020 11:27","firstName":"sssss","id":1581247621137,"lastName":"ssssssss","type":"visitors","visiting":"dddddddddd","_id":"we6rORSUCY3sRfPr"}
 {"company":"ddd","date":"04/02/2020 10:36","firstName":"cc","id":1580812587304,"lastName":"dd","type":"visitors","visiting":"ddddd","_id":"yXESo5S76qtb53kV"}
 {"company":"qqqqqqqqq","date":"08/02/2020 06:03","firstName":"qqqqqq","id":1581141839362,"lastName":"qqqqqqqqq","type":"visitors","visiting":"qqqqqqqqqqqqqqqq","_id":"zXwe4q1nq4VrErMp"}
+{"company":"sasasasas","date":"11/02/2020","firstName":"sasasasa","hour":"12:37","id":1581424629737,"lastName":"ssasass","type":"visitors","visiting":"asasasas","_id":"Zx6EmZ9cOoLEl9Cw"}
+{"company":"dadadad","date":"11/02/2020","firstName":"dadada","hour":"12:37","id":1581424640537,"lastName":"dadada","type":"visitors","visiting":"adadadadadada","_id":"EWXjetKFZgNfyXBr"}
+{"card":"33","date":"11/02/2020","firstName":"sasasa","hour":"12:37","id":1581424648113,"lastName":"sasasasasa","note":"Click to add","returned":"Not Returned","type":"colleagues","_id":"kjsTyFjLuil7VyAB"}
