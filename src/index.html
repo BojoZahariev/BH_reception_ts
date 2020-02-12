@@ -74,7 +74,6 @@
     </div>
 
     <div id="colleaguesListDiv">
-      <p id="archiveBtn">Archive</p>
       <p class="smallTitle">Colleagues</p>
       <div class="colleaguesListPart head">
         <p class="names">Date</p>
@@ -108,11 +107,16 @@
       <p class="smallTitle">Archive</p>
       <form id="archForm">
         <input id="archItem1" class="inputs" type="date" />
-        <input id="archItem2" class="inputs" type="text" placeholder="Name" />
+        <select id="archSelect" class="inputs" name="choice">
+          <option value="colleagues">Colleagues</option>
+          <option value="visitors">Visitors</option>
+        </select>
+        <input id="archItem2" class="inputs" type="text" placeholder="First Name" />
+        <input id="archItem3" class="inputs" type="text" placeholder="Last Name" />
 
         <button id="archSubmit" class="submitBtn" type="submit">SUBMIT</button>
       </form>
-      <p id="archText"></p>
+      <ul id="archList"></ul>
     </div>
 
     <img id="backBtn" src="images/arrow.png" />
@@ -120,6 +124,7 @@
     <div id="listButtons">
       <p id="colleaguesListBtn">Colleagues List</p>
       <p id="visitorsListBtn">Visitors List</p>
+      <p id="archiveBtn">Archive</p>
     </div>
 
     <img id="logo" src="images/WalmartGBStrans.png" />

@@ -72,7 +72,7 @@ body {
 }
 
 #logo {
-  width: 400px;
+  width: 300px;
   position: fixed;
   bottom: 0;
   right: 0;
@@ -111,7 +111,8 @@ body {
 }
 
 #colleaguesListBtn,
-#visitorsListBtn {
+#visitorsListBtn,
+#archiveBtn {
   color: #76c043;
   cursor: pointer;
   display: inline;
@@ -119,7 +120,8 @@ body {
 }
 
 #colleaguesListBtn:hover,
-#visitorsListBtn:hover {
+#visitorsListBtn:hover,
+#archiveBtn:hover {
   color: #45632f;
 }
 

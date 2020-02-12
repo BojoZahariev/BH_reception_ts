@@ -37,8 +37,10 @@ const archiveBtn = document.querySelector('#archiveBtn');
 const archForm = document.querySelector('#archForm');
 const archItem1 = document.querySelector('#archItem1');
 const archItem2 = document.querySelector('#archItem2');
+const archItem3 = document.querySelector('#archItem3');
 const archSubmit = document.querySelector('#archSubmit');
-const archText = document.querySelector('#archText');
+const archList = document.querySelector('#archList');
+const archSelect = document.querySelector('#archSelect');
 
 //store the previous date so it knows when to break the lists
 var lastDate;
@@ -331,7 +333,8 @@ const render = item => {
   }
   lastDate = item.date.slice(0, 3);
 
-  list.appendChild(li);
+  return li;
+  //list.appendChild(li);
 
   //console.log(list.getElementsByTagName('li').length);
 };
@@ -384,7 +387,8 @@ const renderVisitors = item => {
   }
   lastDateV = item.date.slice(0, 3);
 
-  visitorsList.appendChild(li);
+  return li;
+  //visitorsList.appendChild(li);
 };
 
 //Get All Items After Starting
@@ -398,12 +402,12 @@ ipcRenderer.on('loaded', (e, items) =>
       item.type === 'colleagues' &&
       (item.date.slice(0, 10) === getToday().slice(0, 10) || item.date.slice(0, 10) === getYesterday().slice(0, 10))
     ) {
-      render(item);
+      list.appendChild(render(item));
     } else if (
       item.type === 'visitors' &&
       (item.date.slice(0, 10) === getToday().slice(0, 10) || item.date.slice(0, 10) === getYesterday().slice(0, 10))
     ) {
-      renderVisitors(item);
+      visitorsList.appendChild(renderVisitors(item));
     }
   })
 );
@@ -486,22 +490,44 @@ const addZero = i => {
   return i;
 };
 
+//archive submit and send to db
 archForm.addEventListener('submit', e => {
   e.preventDefault();
+
+  //clear the list
+  archList.innerHTML = '';
+
   let searchDate = `${archItem1.value.slice(8, 10)}/${archItem1.value.slice(5, 7)}/${archItem1.value.slice(0, 4)}`;
-  let type = 'colleagues';
-  console.log(searchDate, archItem2.value);
+  let type = archSelect.options[archSelect.selectedIndex].value;
+  let firstName = archItem2.value;
+  let lastName = archItem3.value;
+  console.log(searchDate, firstName, lastName, type);
   ipcRenderer.send('findItem', {
-    searchDate
+    searchDate,
+    type,
+    firstName,
+    lastName
+  });
+});
+
+//display search results
+ipcRenderer.on('found', (e, docs) => {
+  archList.innerHTML = '';
+  docs.forEach(function(item) {
+    if (item.type === 'colleagues') {
+      archList.appendChild(render(item));
+    } else if (item.type === 'visitors') {
+      archList.appendChild(renderVisitors(item));
+    }
   });
 });
 
 //Catches Add Item from server
 ipcRenderer.on('added', (e, item) => {
   if (item.type === 'colleagues') {
-    render(item);
+    list.appendChild(render(item));
   } else {
-    renderVisitors(item);
+    visitorsList.appendChild(renderVisitors(item));
   }
 });
 
