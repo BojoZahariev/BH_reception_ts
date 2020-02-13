@@ -238,7 +238,8 @@ body {
 /*LISTS*/
 
 #colleaguesListDiv,
-#visitorsListDiv {
+#visitorsListDiv,
+#archiveDiv {
   display: none;
   width: 95%;
   margin: auto;
@@ -246,7 +247,8 @@ body {
 }
 
 #colleaguesList,
-#visitorsList {
+#visitorsList,
+#archList {
   color: #222;
   list-style: none;
   display: flex;
@@ -353,6 +355,11 @@ body {
 
 #archiveDiv {
   display: none;
+}
+
+#archForm {
+  width: 100%;
+  text-align: center;
 }
 
 #archItem1 {

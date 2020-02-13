@@ -41,6 +41,7 @@ const archItem3 = document.querySelector('#archItem3');
 const archSubmit = document.querySelector('#archSubmit');
 const archList = document.querySelector('#archList');
 const archSelect = document.querySelector('#archSelect');
+const archClear = document.querySelector('#archClear');
 
 //store the previous date so it knows when to break the lists
 var lastDate;
@@ -51,6 +52,7 @@ colleaguesBtn.addEventListener('click', function(e) {
   colleaguesDiv.style.display = 'block';
   backBtn.style.display = 'block';
   item.focus();
+  fireTest();
 });
 
 visitorsBtn.addEventListener('click', function(e) {
@@ -58,6 +60,7 @@ visitorsBtn.addEventListener('click', function(e) {
   visitorsDiv.style.display = 'block';
   backBtn.style.display = 'block';
   visitorsItem.focus();
+  fireTest();
 });
 
 colleaguesListBtn.addEventListener('click', function(e) {
@@ -176,13 +179,53 @@ const backToInitial = () => {
 };
 
 archiveBtn.addEventListener('click', function(e) {
-  initialDiv.style.display = 'none';
-  visitorsDiv.style.display = 'none';
-  colleaguesDiv.style.display = 'none';
-  backBtn.style.display = 'block';
-  colleaguesListDiv.style.display = 'none';
-  visitorsListDiv.style.display = 'none';
-  archiveDiv.style.display = 'block';
+  let passwordDiv = document.createElement('div');
+  passwordDiv.classList.add('passwordDiv');
+  document.body.appendChild(passwordDiv);
+  let passwordMsg = document.createElement('p');
+  passwordMsg.textContent = 'Enter password';
+  passwordDiv.appendChild(passwordMsg);
+  let passwordForm = document.createElement('form');
+  passwordDiv.appendChild(passwordForm);
+  let inputPassword = document.createElement('input');
+  inputPassword.type = 'text';
+  inputPassword.autofocus = true;
+  inputPassword.classList.add('inputs');
+  passwordForm.appendChild(inputPassword);
+  let passwordSubmit = document.createElement('button');
+  passwordSubmit.type = 'submit';
+  passwordSubmit.textContent = 'Submit';
+  passwordSubmit.classList.add('submitBtn');
+  passwordForm.appendChild(passwordSubmit);
+  let close = document.createElement('p');
+  close.textContent = 'close';
+  close.classList.add('close');
+  passwordDiv.appendChild(close);
+
+  close.addEventListener('click', e => {
+    passwordDiv.style.display = 'none';
+  });
+
+  passwordForm.addEventListener('submit', e => {
+    e.preventDefault();
+    if (inputPassword.value === 'bh') {
+      initialDiv.style.display = 'none';
+      visitorsDiv.style.display = 'none';
+      colleaguesDiv.style.display = 'none';
+      backBtn.style.display = 'block';
+      colleaguesListDiv.style.display = 'none';
+      visitorsListDiv.style.display = 'none';
+      archiveDiv.style.display = 'block';
+      passwordDiv.style.display = 'none';
+    } else {
+      passwordMsg.textContent = 'Wrong password';
+      passwordForm.reset();
+      setTimeout(function() {
+        passwordDiv.style.display = 'none';
+        passwordMsg.textContent = 'Enter password';
+      }, 1500);
+    }
+  });
 });
 
 //set the date format
@@ -522,6 +565,12 @@ ipcRenderer.on('found', (e, docs) => {
   });
 });
 
+//clear the form and list
+archClear.addEventListener('click', () => {
+  archList.innerHTML = '';
+  archForm.reset();
+});
+
 //Catches Add Item from server
 ipcRenderer.on('added', (e, item) => {
   if (item.type === 'colleagues') {
@@ -600,6 +649,7 @@ const playSound = status => {
   }
 };
 
+//shows fire alarm test every wednesday
 const fireTest = () => {
   const fireTestText = document.getElementsByClassName('fire');
   const day = new Date();
@@ -614,4 +664,26 @@ const fireTest = () => {
   }
 };
 
-fireTest();
+const clearOld = () => {
+  //get the date 6 months ago
+  var d = new Date();
+  d.setMonth(d.getMonth() - 6);
+  let sixAgo = d.toLocaleDateString();
+
+  //add zero if < 10
+  let arr = sixAgo.split('/');
+  const zerAd = arr.map(i => {
+    if (i < 10) {
+      i = '0' + i;
+      return i;
+    } else {
+      return i;
+    }
+  });
+
+  const sixAgoFormated = `${zerAd[1]}/${zerAd[0]}/${zerAd[2]}`;
+  console.log(sixAgoFormated);
+  ipcRenderer.send('deleteOld', { sixAgoFormated });
+};
+
+clearOld();
