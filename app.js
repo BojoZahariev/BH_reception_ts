@@ -120,7 +120,6 @@ ipcMain.on('updateNote', (e, item, noteValue) => {
 });
 
 //find
-
 ipcMain.on('findItem', (e, item) => {
   /*
   db.find({ date: item.searchDate, type: item.type })
