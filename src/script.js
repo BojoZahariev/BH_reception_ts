@@ -42,6 +42,9 @@ const archSubmit = document.querySelector('#archSubmit');
 const archList = document.querySelector('#archList');
 const archSelect = document.querySelector('#archSelect');
 const archClear = document.querySelector('#archClear');
+const archNumberLi = document.querySelector('#archNumberLi');
+const archHeadV = document.querySelector('#archHeadV');
+const archHeadC = document.querySelector('#archHeadC');
 
 //store the previous date so it knows when to break the lists
 var lastDate;
@@ -377,9 +380,6 @@ const render = item => {
   lastDate = item.date.slice(0, 3);
 
   return li;
-  //list.appendChild(li);
-
-  //console.log(list.getElementsByTagName('li').length);
 };
 
 //render visitors
@@ -405,11 +405,13 @@ const renderVisitors = item => {
   const company = document.createElement('p');
   company.textContent = item.company;
   company.classList.add('names');
+  company.classList.add('capitalize');
   li.appendChild(company);
 
   const visiting = document.createElement('p');
   visiting.textContent = item.visiting;
   visiting.classList.add('names');
+  visiting.classList.add('capitalize');
   li.appendChild(visiting);
 
   const deleteBtn = document.createElement('p');
@@ -431,7 +433,6 @@ const renderVisitors = item => {
   lastDateV = item.date.slice(0, 3);
 
   return li;
-  //visitorsList.appendChild(li);
 };
 
 //Get All Items After Starting
@@ -539,12 +540,15 @@ archForm.addEventListener('submit', e => {
 
   //clear the list
   archList.innerHTML = '';
+  archHeadC.style.display = 'none';
+  archHeadV.style.display = 'none';
+  archNumberLi.textContent = '';
 
   let searchDate = `${archItem1.value.slice(8, 10)}/${archItem1.value.slice(5, 7)}/${archItem1.value.slice(0, 4)}`;
   let type = archSelect.options[archSelect.selectedIndex].value;
   let firstName = archItem2.value;
   let lastName = archItem3.value;
-  console.log(searchDate, firstName, lastName, type);
+
   ipcRenderer.send('findItem', {
     searchDate,
     type,
@@ -556,18 +560,28 @@ archForm.addEventListener('submit', e => {
 //display search results
 ipcRenderer.on('found', (e, docs) => {
   archList.innerHTML = '';
+  archHeadC.style.display = 'none';
+  archHeadV.style.display = 'none';
+  archNumberLi.textContent = '';
   docs.forEach(function(item) {
     if (item.type === 'colleagues') {
       archList.appendChild(render(item));
+      archHeadC.style.display = 'flex';
     } else if (item.type === 'visitors') {
       archList.appendChild(renderVisitors(item));
+      archHeadV.style.display = 'flex';
     }
   });
+
+  archNumberLi.textContent = archList.getElementsByTagName('li').length;
 });
 
 //clear the form and list
 archClear.addEventListener('click', () => {
   archList.innerHTML = '';
+  archHeadC.style.display = 'none';
+  archHeadV.style.display = 'none';
+  archNumberLi.textContent = '';
   archForm.reset();
 });
 

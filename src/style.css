@@ -307,6 +307,10 @@ body {
   cursor: pointer;
 }
 
+.capitalize {
+  text-transform: capitalize;
+}
+
 .passwordDiv {
   position: fixed;
   top: 10px;
@@ -353,6 +357,7 @@ body {
   cursor: pointer;
 }
 
+/*Archive*/
 #archiveDiv {
   display: none;
 }
@@ -374,4 +379,13 @@ body {
 #archItem1::-webkit-calendar-picker-indicator {
   opacity: 0;
   width: 20px;
+}
+
+#archNumberLi {
+  padding: 10px;
+}
+
+#archHeadV,
+#archHeadC {
+  display: none;
 }

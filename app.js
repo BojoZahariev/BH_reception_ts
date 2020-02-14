@@ -128,11 +128,6 @@ ipcMain.on('updateNote', (e, item, noteValue) => {
 
 //find
 ipcMain.on('findItem', (e, item) => {
-  /*
-  db.find({ date: item.searchDate, type: item.type })
-    .sort({ id: 1 })
-    .exec((err, docs) => mainWindow.webContents.send('found', docs));
-*/
   //date only
   if (item.searchDate !== '//' && item.firstName === '' && item.lastName === '') {
     db.find({ date: item.searchDate, type: item.type })
@@ -141,37 +136,70 @@ ipcMain.on('findItem', (e, item) => {
 
     //last name no date
   } else if (item.searchDate === '//' && item.firstName === '' && item.lastName !== '') {
-    db.find({ type: item.type, lastName: item.lastName })
+    db.find({
+      type: item.type,
+      $where: function() {
+        return this.lastName.includes(item.lastName);
+      }
+    })
       .sort({ id: 1 })
       .exec((err, docs) => mainWindow.webContents.send('found', docs));
 
     //first name no date
   } else if (item.searchDate === '//' && item.firstName !== '' && item.lastName === '') {
-    db.find({ type: item.type, firstName: item.firstName })
+    db.find({
+      type: item.type,
+      $where: function() {
+        return this.firstName.includes(item.firstName);
+      }
+    })
       .sort({ id: 1 })
       .exec((err, docs) => mainWindow.webContents.send('found', docs));
 
     //last name with date
   } else if (item.searchDate !== '//' && item.firstName === '' && item.lastName !== '') {
-    db.find({ date: item.searchDate, type: item.type, lastName: item.lastName })
+    db.find({
+      date: item.searchDate,
+      type: item.type,
+      $where: function() {
+        return this.lastName.includes(item.lastName);
+      }
+    })
       .sort({ id: 1 })
       .exec((err, docs) => mainWindow.webContents.send('found', docs));
 
     //first name with date
   } else if (item.searchDate !== '//' && item.firstName !== '' && item.lastName === '') {
-    db.find({ date: item.searchDate, type: item.type, firstName: item.firstName })
+    db.find({
+      date: item.searchDate,
+      type: item.type,
+      $where: function() {
+        return this.firstName.includes(item.firstName);
+      }
+    })
       .sort({ id: 1 })
       .exec((err, docs) => mainWindow.webContents.send('found', docs));
 
     //both names no date
   } else if (item.searchDate === '//' && item.firstName !== '' && item.lastName !== '') {
-    db.find({ type: item.type, firstName: item.firstName, lastName: item.lastName })
+    db.find({
+      type: item.type,
+      $where: function() {
+        return this.firstName.includes(item.firstName) && this.lastName.includes(item.lastName);
+      }
+    })
       .sort({ id: 1 })
       .exec((err, docs) => mainWindow.webContents.send('found', docs));
 
     //both names with date
   } else if (item.searchDate !== '//' && item.firstName !== '' && item.lastName !== '') {
-    db.find({ type: item.type, firstName: item.firstName, lastName: item.lastName })
+    db.find({
+      date: item.searchDate,
+      type: item.type,
+      $where: function() {
+        return this.firstName.includes(item.firstName) && this.lastName.includes(item.lastName);
+      }
+    })
       .sort({ id: 1 })
       .exec((err, docs) => mainWindow.webContents.send('found', docs));
   }
