@@ -6,7 +6,7 @@
     "nedb": "^1.8.0"
   },
   "name": "reception",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "main": "app.js",
   "devDependencies": {},
   "scripts": {
