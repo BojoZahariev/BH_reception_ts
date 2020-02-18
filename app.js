@@ -33,7 +33,7 @@ const db = new Datastore({
   autoload: true
 });
 
-// Get all items from db, sort by id and send them to the client
+// Get all items from db, sort by id and send them to the client, id is UTC so sorted by date
 ipcMain.on('loadAll', () =>
   db
     .find({})
@@ -50,7 +50,7 @@ ipcMain.on('addItem', (e, item) => {
   mainWindow.webContents.send('added', item);
 });
 
-// Clears database and send event to client if sussesful
+// Clears database and send event to client if successful
 ipcMain.on('clearAll', () => {
   db.remove({}, { multi: true }, err => {
     if (err) throw new Error(err);
@@ -65,9 +65,7 @@ ipcMain.on('deleteItem', (e, item) => {
 
 //clear older than 6 months
 ipcMain.on('deleteOld', (e, item) => {
-  db.remove({ date: item.sixAgo }, { multi: true }, function(err, numRemoved) {
-    console.log(numRemoved);
-  });
+  db.remove({ date: item.sixAgo }, { multi: true }, function(err, numRemoved) {});
 });
 
 //update returned
