@@ -4,6 +4,11 @@
   box-sizing: border-box;
 }
 
+@font-face {
+  font-family: lato;
+  src: url(fonts/Lato-Regular.ttf);
+}
+
 body {
   background-color: #007dc6;
   height: 100vh;
@@ -11,8 +16,9 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
+  background-attachment: fixed;
   letter-spacing: 0.5px;
-  font-family: 'Lato', sans-serif;
+  font-family: lato;
 }
 
 /*INITIAL*/
@@ -202,7 +208,7 @@ body {
 }
 
 .smallTitle {
-  padding: 10px;
+  padding: 20px;
   font-size: 22px;
   color: #ffc220;
   text-align: center;
