@@ -38,6 +38,7 @@ const archForm = document.querySelector('#archForm');
 const archItem1 = document.querySelector('#archItem1');
 const archItem2 = document.querySelector('#archItem2');
 const archItem3 = document.querySelector('#archItem3');
+const archItem4 = document.querySelector('#archItem4');
 const archSubmit = document.querySelector('#archSubmit');
 const archList = document.querySelector('#archList');
 const archSelect = document.querySelector('#archSelect');
@@ -179,6 +180,9 @@ const backToInitial = () => {
   colleaguesListDiv.style.display = 'none';
   visitorsListDiv.style.display = 'none';
   archiveDiv.style.display = 'none';
+
+  lastDate = getToday().slice(0, 3);
+  lastDateV = getToday().slice(0, 3);
 };
 
 archiveBtn.addEventListener('click', function(e) {
@@ -548,12 +552,14 @@ archForm.addEventListener('submit', e => {
   let type = archSelect.options[archSelect.selectedIndex].value;
   let firstName = archItem2.value;
   let lastName = archItem3.value;
+  let card = archItem4.value;
 
   ipcRenderer.send('findItem', {
     searchDate,
     type,
     firstName,
-    lastName
+    lastName,
+    card
   });
 });
 
@@ -654,7 +660,7 @@ const playSound = status => {
     sound1.play();
 
     //show thank you
-    tyDiv.style.display = 'block';
+    tyDiv.style.display = 'flex';
     setTimeout(function() {
       tyDiv.style.display = 'none';
     }, 2000);
