@@ -1,4 +1,4 @@
-# Array methods done the Pirate way.
+# Reception App for signing in visitors and colleagues.
 
-## Tools: Electron, JavaScript, CSS, HTML
+## Tools: Electron, JavaScript, NeDB, CSS, HTML 
 
