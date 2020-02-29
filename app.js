@@ -43,26 +43,16 @@ ipcMain.on('loadListColleagues', (e, item) => {
 
 //visitors
 ipcMain.on('loadListVisitors', (e, item) => {
-  /*
-  db.find({
-    type: item.type,
-    $where: function() {
-      return this.date.includes(item.today) || this.date.includes(item.yesterday);
-    }
-  })
-  */
   db.find({ type: item.type, $or: [{ date: item.today }, { date: item.yesterday }] })
     .sort({ id: 1 })
     .exec((err, docs) => mainWindow.webContents.send('loadedVisitors', docs));
 });
 
-//Saves item and returns it to client
+//Saves item in the db
 ipcMain.on('addItem', (e, item) => {
   db.insert(item, err => {
     if (err) throw new Error(err);
   });
-
-  //mainWindow.webContents.send('added', item);
 });
 
 // Clears database and send event to client if successful
@@ -139,16 +129,28 @@ ipcMain.on('updateNote', (e, item, noteValue) => {
   );
 });
 
-//find
+//FIND
 ipcMain.on('findItem', (e, item) => {
   //date only
-  if (item.searchDate !== '//' && item.firstName === '' && item.lastName === '' && item.card === '') {
+  if (
+    item.searchDate !== '//' &&
+    item.month === '/' &&
+    item.firstName === '' &&
+    item.lastName === '' &&
+    item.card === ''
+  ) {
     db.find({ date: item.searchDate, type: item.type })
       .sort({ id: 1 })
       .exec((err, docs) => mainWindow.webContents.send('found', docs));
 
     //last name no date
-  } else if (item.searchDate === '//' && item.firstName === '' && item.lastName !== '' && item.card === '') {
+  } else if (
+    item.searchDate === '//' &&
+    item.month === '/' &&
+    item.firstName === '' &&
+    item.lastName !== '' &&
+    item.card === ''
+  ) {
     db.find({
       type: item.type,
       $where: function() {
@@ -159,7 +161,13 @@ ipcMain.on('findItem', (e, item) => {
       .exec((err, docs) => mainWindow.webContents.send('found', docs));
 
     //first name no date
-  } else if (item.searchDate === '//' && item.firstName !== '' && item.lastName === '' && item.card === '') {
+  } else if (
+    item.searchDate === '//' &&
+    item.month === '/' &&
+    item.firstName !== '' &&
+    item.lastName === '' &&
+    item.card === ''
+  ) {
     db.find({
       type: item.type,
       $where: function() {
@@ -170,7 +178,13 @@ ipcMain.on('findItem', (e, item) => {
       .exec((err, docs) => mainWindow.webContents.send('found', docs));
 
     //last name with date
-  } else if (item.searchDate !== '//' && item.firstName === '' && item.lastName !== '' && item.card === '') {
+  } else if (
+    item.searchDate !== '//' &&
+    item.month === '/' &&
+    item.firstName === '' &&
+    item.lastName !== '' &&
+    item.card === ''
+  ) {
     db.find({
       date: item.searchDate,
       type: item.type,
@@ -181,8 +195,31 @@ ipcMain.on('findItem', (e, item) => {
       .sort({ id: 1 })
       .exec((err, docs) => mainWindow.webContents.send('found', docs));
 
+    //last name with month
+  } else if (
+    item.searchDate === '//' &&
+    item.month !== '/' &&
+    item.firstName === '' &&
+    item.lastName !== '' &&
+    item.card === ''
+  ) {
+    db.find({
+      type: item.type,
+      $where: function() {
+        return this.lastName.includes(item.lastName) && this.date.includes(item.month);
+      }
+    })
+      .sort({ id: 1 })
+      .exec((err, docs) => mainWindow.webContents.send('found', docs));
+
     //first name with date
-  } else if (item.searchDate !== '//' && item.firstName !== '' && item.lastName === '' && item.card === '') {
+  } else if (
+    item.searchDate !== '//' &&
+    item.month === '/' &&
+    item.firstName !== '' &&
+    item.lastName === '' &&
+    item.card === ''
+  ) {
     db.find({
       date: item.searchDate,
       type: item.type,
@@ -193,8 +230,31 @@ ipcMain.on('findItem', (e, item) => {
       .sort({ id: 1 })
       .exec((err, docs) => mainWindow.webContents.send('found', docs));
 
+    //first name with month
+  } else if (
+    item.searchDate === '//' &&
+    item.month !== '/' &&
+    item.firstName !== '' &&
+    item.lastName === '' &&
+    item.card === ''
+  ) {
+    db.find({
+      type: item.type,
+      $where: function() {
+        return this.firstName.includes(item.firstName) && this.date.includes(item.month);
+      }
+    })
+      .sort({ id: 1 })
+      .exec((err, docs) => mainWindow.webContents.send('found', docs));
+
     //both names no date
-  } else if (item.searchDate === '//' && item.firstName !== '' && item.lastName !== '' && item.card === '') {
+  } else if (
+    item.searchDate === '//' &&
+    item.month === '/' &&
+    item.firstName !== '' &&
+    item.lastName !== '' &&
+    item.card === ''
+  ) {
     db.find({
       type: item.type,
       $where: function() {
@@ -205,7 +265,13 @@ ipcMain.on('findItem', (e, item) => {
       .exec((err, docs) => mainWindow.webContents.send('found', docs));
 
     //both names with date
-  } else if (item.searchDate !== '//' && item.firstName !== '' && item.lastName !== '' && item.card === '') {
+  } else if (
+    item.searchDate !== '//' &&
+    item.month === '/' &&
+    item.firstName !== '' &&
+    item.lastName !== '' &&
+    item.card === ''
+  ) {
     db.find({
       date: item.searchDate,
       type: item.type,
@@ -215,11 +281,32 @@ ipcMain.on('findItem', (e, item) => {
     })
       .sort({ id: 1 })
       .exec((err, docs) => mainWindow.webContents.send('found', docs));
+    //both names with month
+  } else if (
+    item.searchDate === '//' &&
+    item.month !== '/' &&
+    item.firstName !== '' &&
+    item.lastName !== '' &&
+    item.card === ''
+  ) {
+    db.find({
+      type: item.type,
+      $where: function() {
+        return (
+          this.firstName.includes(item.firstName) &&
+          this.lastName.includes(item.lastName) &&
+          this.date.includes(item.month)
+        );
+      }
+    })
+      .sort({ id: 1 })
+      .exec((err, docs) => mainWindow.webContents.send('found', docs));
     //card number only
   } else if (
     item.card !== '' &&
     item.type === 'colleagues' &&
     item.searchDate === '//' &&
+    item.month === '/' &&
     item.firstName === '' &&
     item.lastName === ''
   ) {
@@ -227,15 +314,50 @@ ipcMain.on('findItem', (e, item) => {
       .sort({ id: 1 })
       .exec((err, docs) => mainWindow.webContents.send('found', docs));
 
-    //card number and date
+    //card number with date
   } else if (
     item.card !== '' &&
     item.type === 'colleagues' &&
     item.searchDate !== '//' &&
+    item.month === '/' &&
     item.firstName === '' &&
     item.lastName === ''
   ) {
     db.find({ card: item.card, type: item.type, date: item.searchDate })
+      .sort({ id: 1 })
+      .exec((err, docs) => mainWindow.webContents.send('found', docs));
+    //card number with month
+  } else if (
+    item.month !== '/' &&
+    item.card !== '' &&
+    item.type === 'colleagues' &&
+    item.searchDate === '//' &&
+    item.firstName === '' &&
+    item.lastName === ''
+  ) {
+    db.find({
+      card: item.card,
+      type: item.type,
+      $where: function() {
+        return this.date.includes(item.month);
+      }
+    })
+      .sort({ id: 1 })
+      .exec((err, docs) => mainWindow.webContents.send('found', docs));
+    //month only
+  } else if (
+    item.month !== '/' &&
+    item.searchDate === '//' &&
+    item.firstName === '' &&
+    item.lastName === '' &&
+    item.card === ''
+  ) {
+    db.find({
+      type: item.type,
+      $where: function() {
+        return this.date.includes(item.month);
+      }
+    })
       .sort({ id: 1 })
       .exec((err, docs) => mainWindow.webContents.send('found', docs));
   }

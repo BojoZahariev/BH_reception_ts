@@ -7,6 +7,7 @@ const item = document.querySelector('#input1');
 const item2 = document.querySelector('#input2');
 const item3 = document.querySelector('#input3');
 const list = document.querySelector('#colleaguesList');
+const colleaguesCount = document.querySelector('#colleaguesCount');
 const colleaguesSubmit = document.querySelector('#colleaguesSubmit');
 
 //visitors
@@ -16,6 +17,7 @@ const visitorsItem2 = document.querySelector('#input2Visitors');
 const visitorsItem3 = document.querySelector('#input3Visitors');
 const visitorsItem4 = document.querySelector('#input4Visitors');
 const visitorsList = document.querySelector('#visitorsList');
+const visitorsCount = document.querySelector('#visitorsCount');
 const visitorsSubmit = document.querySelector('#visitorsSubmit');
 
 //divs and buttons
@@ -39,6 +41,7 @@ const archItem1 = document.querySelector('#archItem1');
 const archItem2 = document.querySelector('#archItem2');
 const archItem3 = document.querySelector('#archItem3');
 const archItem4 = document.querySelector('#archItem4');
+const archItem5 = document.querySelector('#archItem5');
 const archSubmit = document.querySelector('#archSubmit');
 const archList = document.querySelector('#archList');
 const archSelect = document.querySelector('#archSelect');
@@ -201,8 +204,8 @@ const backToInitial = () => {
   visitorsListDiv.style.display = 'none';
   archiveDiv.style.display = 'none';
 
-  lastDate = getToday().slice(0, 3);
-  lastDateV = getToday().slice(0, 3);
+  lastDate = '';
+  lastDateV = '';
 };
 
 archiveBtn.addEventListener('click', function(e) {
@@ -253,6 +256,9 @@ archiveBtn.addEventListener('click', function(e) {
       }, 1500);
     }
   });
+
+  //clear records older than 6 months
+  clearOld();
 });
 
 //set the date format
@@ -394,6 +400,8 @@ const render = item => {
   deleteBtn.addEventListener('click', function(e) {
     let div = deleteBtn.parentElement;
     div.style.display = 'none';
+    div.classList.remove('today');
+    colleaguesCount.textContent = list.getElementsByClassName('today').length;
     ipcRenderer.send('deleteItem', { item });
   });
 
@@ -401,6 +409,12 @@ const render = item => {
   if (item.date.slice(0, 3) !== lastDate && list.getElementsByTagName('li').length > 0) {
     li.classList.add('lastLi');
   }
+
+  //count
+  if (item.date.slice(0, 10) === getToday().slice(0, 10)) {
+    li.classList.add('today');
+  }
+
   lastDate = item.date.slice(0, 3);
 
   return li;
@@ -447,6 +461,8 @@ const renderVisitors = item => {
   deleteBtn.addEventListener('click', function(e) {
     let div = deleteBtn.parentElement;
     div.style.display = 'none';
+    div.classList.remove('todayVisitors');
+    visitorsCount.textContent = visitorsList.getElementsByClassName('todayVisitors').length;
     ipcRenderer.send('deleteItem', { item });
   });
 
@@ -454,39 +470,23 @@ const renderVisitors = item => {
   if (item.date.slice(0, 3) !== lastDateV && list.getElementsByTagName('li').length > 0) {
     li.classList.add('lastLi');
   }
+
+  //count
+  if (item.date.slice(0, 10) === getToday().slice(0, 10)) {
+    li.classList.add('todayVisitors');
+  }
+
   lastDateV = item.date.slice(0, 3);
 
   return li;
 };
-
-/*
-//Get All Items After Starting
-window.addEventListener('load', () => ipcRenderer.send('loadAll'));
-//ipcRenderer.on('loaded', (e, items) => items.forEach(item => render(item)));
-
-ipcRenderer.on('loaded', (e, items) =>
-  items.forEach(function(item) {
-    //send for display only today and yesterday
-    if (
-      item.type === 'colleagues' &&
-      (item.date.slice(0, 10) === getToday().slice(0, 10) || item.date.slice(0, 10) === getYesterday().slice(0, 10))
-    ) {
-      list.appendChild(render(item));
-    } else if (
-      item.type === 'visitors' &&
-      (item.date.slice(0, 10) === getToday().slice(0, 10) || item.date.slice(0, 10) === getYesterday().slice(0, 10))
-    ) {
-      visitorsList.appendChild(renderVisitors(item));
-    }
-  })
-);
-*/
 
 //catch loaded colleagues list
 ipcRenderer.on('loadedColleagues', (e, items) =>
   //send for display
   items.forEach(function(item) {
     list.appendChild(render(item));
+    colleaguesCount.textContent = list.getElementsByClassName('today').length;
   })
 );
 
@@ -494,8 +494,8 @@ ipcRenderer.on('loadedColleagues', (e, items) =>
 ipcRenderer.on('loadedVisitors', (e, items) =>
   //send for display
   items.forEach(function(item) {
-    console.log(item);
     visitorsList.appendChild(renderVisitors(item));
+    visitorsCount.textContent = visitorsList.getElementsByClassName('todayVisitors').length;
   })
 );
 
@@ -592,13 +592,15 @@ archForm.addEventListener('submit', e => {
   let firstName = archItem2.value;
   let lastName = archItem3.value;
   let card = archItem4.value;
+  let month = `${archItem5.value.slice(5, 7)}/${archItem5.value.slice(0, 4)}`;
 
   ipcRenderer.send('findItem', {
     searchDate,
     type,
     firstName,
     lastName,
-    card
+    card,
+    month
   });
 });
 
@@ -629,17 +631,6 @@ archClear.addEventListener('click', () => {
   archNumberLi.textContent = '';
   archForm.reset();
 });
-
-/*
-//Catches Add Item from server
-ipcRenderer.on('added', (e, item) => {
-  if (item.type === 'colleagues') {
-    list.appendChild(render(item));
-  } else {
-    visitorsList.appendChild(renderVisitors(item));
-  }
-});
-*/
 
 //Catches ClearAll from menu, asks for a password and sends the event to server to clear the db.
 ipcRenderer.on('clearAll', () => {
@@ -710,13 +701,15 @@ const playSound = status => {
   }
 };
 
-//shows fire alarm test every wednesday
+//shows fire alarm test every wednesday before 11.00
 const fireTest = () => {
   const fireTestText = document.getElementsByClassName('fire');
   const day = new Date();
   const day1 = day.getDay();
+  const time = day.getHours();
+
   // Sunday - Saturday : 0 - 6
-  if (day1 === 3) {
+  if (day1 === 6 && time < 11) {
     fireTestText[0].style.display = 'block';
     fireTestText[1].style.display = 'block';
   } else {
@@ -746,5 +739,3 @@ const clearOld = () => {
   console.log(sixAgoFormated);
   ipcRenderer.send('deleteOld', { sixAgoFormated });
 };
-
-clearOld();

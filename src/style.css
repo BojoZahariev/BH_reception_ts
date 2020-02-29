@@ -388,11 +388,16 @@ body {
   text-align: center;
 }
 
-#archItem1 {
+#archItem1,
+#archItem5 {
   background: #f1faee url(images/calendar.png) 97% 50% no-repeat;
 }
 
 #archItem1::-webkit-inner-spin-button {
+  display: none;
+}
+
+#archItem5::-webkit-inner-spin-button {
   display: none;
 }
 
@@ -401,7 +406,14 @@ body {
   width: 20px;
 }
 
-#archNumberLi {
+#archItem5::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  width: 20px;
+}
+
+#archNumberLi,
+#visitorsCount,
+#colleaguesCount {
   padding: 10px;
 }
 

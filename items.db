@@ -1,7 +1,6 @@
-{"card":"25","date":"29/02/2020","firstName":"bnbn","hour":"08:47","id":1582966075353,"lastName":"nbnnbb","note":"Click to add","returned":"Not Returned","type":"colleagues","_id":"1zfCOMqL9gCn0j8s"}
-{"id":1582960801770,"firstName":"bojo","lastName":"zahariev","card":"99","date":"29/02/2020","hour":"07:20","returned":"Returned","note":"full access","type":"colleagues","_id":"4zIbY3jFzGaEgk1H"}
-{"card":"22","date":"29/02/2020","firstName":"aaaaaa","hour":"07:28","id":1582961281559,"lastName":"ssssss","note":"Click to add","returned":"Not Returned","type":"colleagues","_id":"BexnPyEwveKCvn3L"}
-{"company":"vnmnmmnm","date":"29/02/2020","firstName":"vbvbv","hour":"07:39","id":1582961941554,"lastName":"bvbvbvbb","type":"visitors","visiting":"qwwqwqwqwqwq","_id":"YkjpEVfN9w1Fgipp"}
-{"company":"wqwqwqwq","date":"29/02/2020","firstName":"dfdfdff","hour":"07:35","id":1582961730905,"lastName":"ghhhghgh","type":"visitors","visiting":"fgggfgfg","_id":"lGSJxE8fwYgT3ySm"}
-{"card":"3","date":"29/02/2020","firstName":"nmnmnmn","hour":"07:39","id":1582961978052,"lastName":"jkjkjkj","note":"Click to add","returned":"Not Returned","type":"colleagues","_id":"yZ06H4mCWugjPGub"}
+{"id":1582966075353,"firstName":"bnbn","lastName":"nbnnbb","card":"25","date":"29/02/2020","hour":"08:47","returned":"Returned","note":"Click to add","type":"colleagues","_id":"1zfCOMqL9gCn0j8s"}
 {"company":"fdfyy","date":"29/02/2020","firstName":"dfdf","hour":"08:50","id":1582966232835,"lastName":"dfd","type":"visitors","visiting":"jyjyjyjyjyjyjy","_id":"4kMOx1PL8M660TpZ"}
+{"id":1582960801770,"firstName":"bojo","lastName":"zahariev","card":"99","date":"29/02/2020","hour":"07:20","returned":"Returned","note":"full access","type":"colleagues","_id":"4zIbY3jFzGaEgk1H"}
+{"card":"43","date":"29/02/2020","firstName":"lucy","hour":"12:06","id":1582977968578,"lastName":"ewbank","note":"Click to add","returned":"Not Returned","type":"colleagues","_id":"79G2QPLFlHzBSHPe"}
+{"company":"vvvvvvvv","date":"29/02/2020","firstName":"vvvvv","hour":"12:02","id":1582977769996,"lastName":"vvvvvvv","type":"visitors","visiting":"vvvvvv nnnnnn","_id":"iOG5NOwtRmgNk47E"}
+{"card":"01","date":"29/02/2020","firstName":"xxxxx","hour":"11:44","id":1582976667178,"lastName":"xxxxxxx","note":"Click to add","returned":"Not Returned","type":"colleagues","_id":"sL5rbN61e9xTN4rB"}

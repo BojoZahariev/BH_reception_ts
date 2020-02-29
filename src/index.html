@@ -72,6 +72,7 @@
 
     <div id="colleaguesListDiv">
       <p class="smallTitle">Colleagues</p>
+      <span id="colleaguesCount"></span>
       <div class="colleaguesListPart head">
         <p class="names">Date</p>
         <p class="names">First Name</p>
@@ -87,7 +88,7 @@
 
     <div id="visitorsListDiv">
       <p class="smallTitle">Visitors</p>
-
+      <span id="visitorsCount"></span>
       <div class="colleaguesListPart head">
         <p class="names">Date</p>
         <p class="names">First Name</p>
@@ -104,13 +105,24 @@
     <div id="archiveDiv">
       <p class="smallTitle">Archive</p>
       <form id="archForm">
+        <label>Search by date</label>
         <input id="archItem1" class="inputs" type="date" />
+
+        <label>Search by month</label>
+        <input type="month" id="archItem5" class="inputs" name="month" placeholder="foo" />
+
+        <label>Search by type</label>
         <select id="archSelect" class="inputs" name="choice">
           <option value="colleagues">Colleagues</option>
           <option value="visitors">Visitors</option>
         </select>
+
+        <br />
+        <label>Search by name</label>
         <input id="archItem2" class="inputs" type="text" placeholder="First Name" />
         <input id="archItem3" class="inputs" type="text" placeholder="Last Name" />
+
+        <label>Search by card</label>
         <input id="archItem4" class="inputs" type="text" placeholder="Card #" />
 
         <button id="archSubmit" class="submitBtn" type="submit">SEARCH</button>
