@@ -115,6 +115,16 @@ colleaguesListBtn.addEventListener('click', function(e) {
       }, 1500);
     }
   });
+
+  //send a request to the db
+  ipcRenderer.send('loadListColleagues', {
+    today: getToday().slice(0, 10),
+    yesterday: getYesterday().slice(0, 10),
+    type: 'colleagues'
+  });
+
+  //clear the list first
+  list.innerHTML = '';
 });
 
 visitorsListBtn.addEventListener('click', function(e) {
@@ -166,6 +176,16 @@ visitorsListBtn.addEventListener('click', function(e) {
       }, 1500);
     }
   });
+
+  //send a request to the db
+  ipcRenderer.send('loadListVisitors', {
+    today: getToday().slice(0, 10),
+    yesterday: getYesterday().slice(0, 10),
+    type: 'visitors'
+  });
+
+  //clear the list first
+  visitorsList.innerHTML = '';
 });
 
 backBtn.addEventListener('click', function(e) {
@@ -439,6 +459,7 @@ const renderVisitors = item => {
   return li;
 };
 
+/*
 //Get All Items After Starting
 window.addEventListener('load', () => ipcRenderer.send('loadAll'));
 //ipcRenderer.on('loaded', (e, items) => items.forEach(item => render(item)));
@@ -457,6 +478,24 @@ ipcRenderer.on('loaded', (e, items) =>
     ) {
       visitorsList.appendChild(renderVisitors(item));
     }
+  })
+);
+*/
+
+//catch loaded colleagues list
+ipcRenderer.on('loadedColleagues', (e, items) =>
+  //send for display
+  items.forEach(function(item) {
+    list.appendChild(render(item));
+  })
+);
+
+//catch loaded visitors list
+ipcRenderer.on('loadedVisitors', (e, items) =>
+  //send for display
+  items.forEach(function(item) {
+    console.log(item);
+    visitorsList.appendChild(renderVisitors(item));
   })
 );
 
@@ -591,6 +630,7 @@ archClear.addEventListener('click', () => {
   archForm.reset();
 });
 
+/*
 //Catches Add Item from server
 ipcRenderer.on('added', (e, item) => {
   if (item.type === 'colleagues') {
@@ -599,6 +639,7 @@ ipcRenderer.on('added', (e, item) => {
     visitorsList.appendChild(renderVisitors(item));
   }
 });
+*/
 
 //Catches ClearAll from menu, asks for a password and sends the event to server to clear the db.
 ipcRenderer.on('clearAll', () => {

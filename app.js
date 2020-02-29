@@ -33,13 +33,28 @@ const db = new Datastore({
   autoload: true
 });
 
-// Get all items from db, sort by id and send them to the client, id is UTC so sorted by date
-ipcMain.on('loadAll', () =>
-  db
-    .find({})
+// Get the items for today and yesterday from db, sort by id and send them to the client, id is UTC so sorted by date
+//colleagues
+ipcMain.on('loadListColleagues', (e, item) => {
+  db.find({ type: item.type, $or: [{ date: item.today }, { date: item.yesterday }] })
     .sort({ id: 1 })
-    .exec((err, items) => mainWindow.webContents.send('loaded', items))
-);
+    .exec((err, docs) => mainWindow.webContents.send('loadedColleagues', docs));
+});
+
+//visitors
+ipcMain.on('loadListVisitors', (e, item) => {
+  /*
+  db.find({
+    type: item.type,
+    $where: function() {
+      return this.date.includes(item.today) || this.date.includes(item.yesterday);
+    }
+  })
+  */
+  db.find({ type: item.type, $or: [{ date: item.today }, { date: item.yesterday }] })
+    .sort({ id: 1 })
+    .exec((err, docs) => mainWindow.webContents.send('loadedVisitors', docs));
+});
 
 //Saves item and returns it to client
 ipcMain.on('addItem', (e, item) => {
@@ -47,7 +62,7 @@ ipcMain.on('addItem', (e, item) => {
     if (err) throw new Error(err);
   });
 
-  mainWindow.webContents.send('added', item);
+  //mainWindow.webContents.send('added', item);
 });
 
 // Clears database and send event to client if successful
