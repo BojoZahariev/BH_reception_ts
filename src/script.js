@@ -709,7 +709,7 @@ const fireTest = () => {
   const time = day.getHours();
 
   // Sunday - Saturday : 0 - 6
-  if (day1 === 6 && time < 11) {
+  if (day1 === 3 && time < 11) {
     fireTestText[0].style.display = 'block';
     fireTestText[1].style.display = 'block';
   } else {
