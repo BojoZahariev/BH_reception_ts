@@ -32,6 +32,7 @@ const backBtn = document.querySelector('#backBtn');
 const colleaguesListBtn = document.querySelector('#colleaguesListBtn');
 const visitorsListBtn = document.querySelector('#visitorsListBtn');
 const tyDiv = document.querySelector('#tyDiv');
+const passwordDivHolder = document.querySelector('#passwordDivHolder');
 
 //archive
 const archiveDiv = document.querySelector('#archiveDiv');
@@ -71,9 +72,12 @@ visitorsBtn.addEventListener('click', function(e) {
 });
 
 colleaguesListBtn.addEventListener('click', function(e) {
+  clearPasswordDiv();
+
   let passwordDiv = document.createElement('div');
   passwordDiv.classList.add('passwordDiv');
-  document.body.appendChild(passwordDiv);
+  passwordDivHolder.style.display = 'block';
+  passwordDivHolder.appendChild(passwordDiv);
   let passwordMsg = document.createElement('p');
   passwordMsg.textContent = 'Enter password';
   passwordDiv.appendChild(passwordMsg);
@@ -95,12 +99,12 @@ colleaguesListBtn.addEventListener('click', function(e) {
   passwordDiv.appendChild(close);
 
   close.addEventListener('click', e => {
-    passwordDiv.style.display = 'none';
+    passwordDivHolder.style.display = 'none';
   });
 
   passwordForm.addEventListener('submit', e => {
     e.preventDefault();
-    if (inputPassword.value === 'bh') {
+    if (inputPassword.value === 'bh' || inputPassword.value === 'BH') {
       initialDiv.style.display = 'none';
       visitorsDiv.style.display = 'none';
       colleaguesDiv.style.display = 'none';
@@ -108,12 +112,12 @@ colleaguesListBtn.addEventListener('click', function(e) {
       colleaguesListDiv.style.display = 'block';
       backBtn.style.display = 'block';
       archiveDiv.style.display = 'none';
-      passwordDiv.style.display = 'none';
+      passwordDivHolder.style.display = 'none';
     } else {
       passwordMsg.textContent = 'Wrong password';
       passwordForm.reset();
       setTimeout(function() {
-        passwordDiv.style.display = 'none';
+        passwordDivHolder.style.display = 'none';
         passwordMsg.textContent = 'Enter password';
       }, 1500);
     }
@@ -131,9 +135,12 @@ colleaguesListBtn.addEventListener('click', function(e) {
 });
 
 visitorsListBtn.addEventListener('click', function(e) {
+  clearPasswordDiv();
+
   let passwordDiv = document.createElement('div');
   passwordDiv.classList.add('passwordDiv');
-  document.body.appendChild(passwordDiv);
+  passwordDivHolder.style.display = 'block';
+  passwordDivHolder.appendChild(passwordDiv);
   let passwordMsg = document.createElement('p');
   passwordMsg.textContent = 'Enter password';
   passwordDiv.appendChild(passwordMsg);
@@ -156,25 +163,25 @@ visitorsListBtn.addEventListener('click', function(e) {
   passwordDiv.appendChild(close);
 
   close.addEventListener('click', e => {
-    passwordDiv.style.display = 'none';
+    passwordDivHolder.style.display = 'none';
   });
 
   passwordForm.addEventListener('submit', e => {
     e.preventDefault();
-    if (inputPassword.value === 'bh') {
+    if (inputPassword.value === 'bh' || inputPassword.value === 'BH') {
       initialDiv.style.display = 'none';
       visitorsDiv.style.display = 'none';
       colleaguesDiv.style.display = 'none';
       colleaguesListDiv.style.display = 'none';
       visitorsListDiv.style.display = 'block';
       backBtn.style.display = 'block';
-      passwordDiv.style.display = 'none';
+      passwordDivHolder.style.display = 'none';
       archiveDiv.style.display = 'none';
     } else {
       passwordMsg.textContent = 'Wrong password';
       passwordForm.reset();
       setTimeout(function() {
-        passwordDiv.style.display = 'none';
+        passwordDivHolder.style.display = 'none';
         passwordMsg.textContent = 'Enter password';
       }, 1500);
     }
@@ -203,15 +210,19 @@ const backToInitial = () => {
   colleaguesListDiv.style.display = 'none';
   visitorsListDiv.style.display = 'none';
   archiveDiv.style.display = 'none';
+  passwordDivHolder.style.display = 'none';
 
   lastDate = '';
   lastDateV = '';
 };
 
 archiveBtn.addEventListener('click', function(e) {
+  clearPasswordDiv();
+
   let passwordDiv = document.createElement('div');
   passwordDiv.classList.add('passwordDiv');
-  document.body.appendChild(passwordDiv);
+  passwordDivHolder.style.display = 'block';
+  passwordDivHolder.appendChild(passwordDiv);
   let passwordMsg = document.createElement('p');
   passwordMsg.textContent = 'Enter password';
   passwordDiv.appendChild(passwordMsg);
@@ -233,12 +244,12 @@ archiveBtn.addEventListener('click', function(e) {
   passwordDiv.appendChild(close);
 
   close.addEventListener('click', e => {
-    passwordDiv.style.display = 'none';
+    passwordDivHolder.style.display = 'none';
   });
 
   passwordForm.addEventListener('submit', e => {
     e.preventDefault();
-    if (inputPassword.value === 'bh') {
+    if (inputPassword.value === 'bh' || inputPassword.value === 'BH') {
       initialDiv.style.display = 'none';
       visitorsDiv.style.display = 'none';
       colleaguesDiv.style.display = 'none';
@@ -246,12 +257,12 @@ archiveBtn.addEventListener('click', function(e) {
       colleaguesListDiv.style.display = 'none';
       visitorsListDiv.style.display = 'none';
       archiveDiv.style.display = 'block';
-      passwordDiv.style.display = 'none';
+      passwordDivHolder.style.display = 'none';
     } else {
       passwordMsg.textContent = 'Wrong password';
       passwordForm.reset();
       setTimeout(function() {
-        passwordDiv.style.display = 'none';
+        passwordDivHolder.style.display = 'none';
         passwordMsg.textContent = 'Enter password';
       }, 1500);
     }
@@ -260,6 +271,15 @@ archiveBtn.addEventListener('click', function(e) {
   //clear records older than 6 months
   clearOld();
 });
+
+//clear the password div holder
+const clearPasswordDiv = () => {
+  while (passwordDivHolder.firstChild) {
+    passwordDivHolder.removeChild(passwordDivHolder.firstChild);
+  }
+
+  passwordDivHolder.style.display = 'none';
+};
 
 //set the date format
 const getToday = () => {
@@ -467,7 +487,7 @@ const renderVisitors = item => {
   });
 
   //set the gap between the dates
-  if (item.date.slice(0, 3) !== lastDateV && list.getElementsByTagName('li').length > 0) {
+  if (item.date.slice(0, 3) !== lastDateV && visitorsList.getElementsByTagName('li').length > 0) {
     li.classList.add('lastLi');
   }
 
@@ -562,7 +582,7 @@ const fail = () => {
   document.body.appendChild(noteDiv);
   let noteMsg = document.createElement('p');
   noteMsg.classList.add('smallTitle');
-  noteMsg.textContent = 'Please use full names';
+  noteMsg.textContent = 'Please fill all the boxes and use full names';
   noteDiv.appendChild(noteMsg);
 
   setTimeout(function() {
@@ -634,9 +654,11 @@ archClear.addEventListener('click', () => {
 
 //Catches ClearAll from menu, asks for a password and sends the event to server to clear the db.
 ipcRenderer.on('clearAll', () => {
+  clearPasswordDiv();
   let passwordDiv = document.createElement('div');
   passwordDiv.classList.add('passwordDiv');
-  document.body.appendChild(passwordDiv);
+  passwordDivHolder.style.display = 'block';
+  passwordDivHolder.appendChild(passwordDiv);
   let passwordMsg = document.createElement('p');
   passwordMsg.textContent = 'Enter password';
   passwordDiv.appendChild(passwordMsg);
@@ -659,7 +681,7 @@ ipcRenderer.on('clearAll', () => {
   passwordDiv.appendChild(close);
 
   close.addEventListener('click', e => {
-    passwordDiv.style.display = 'none';
+    passwordDivHolder.style.display = 'none';
   });
 
   passwordForm.addEventListener('submit', function(e) {
@@ -667,13 +689,13 @@ ipcRenderer.on('clearAll', () => {
 
     if (inputPassword.value === 'bhadmin') {
       ipcRenderer.send('clearAll');
-      passwordDiv.style.display = 'none';
+      passwordDivHolder.style.display = 'none';
       passwordForm.reset();
     } else {
       passwordMsg.textContent = 'Wrong password';
       passwordForm.reset();
       setTimeout(function() {
-        passwordDiv.style.display = 'none';
+        passwordDivHolder.style.display = 'none';
         passwordMsg.textContent = 'Enter password';
       }, 1500);
     }
