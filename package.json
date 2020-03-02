@@ -6,11 +6,11 @@
     "nedb": "^1.8.0"
   },
   "name": "reception",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "main": "app.js",
   "devDependencies": {},
   "scripts": {
-    "start": "electron .",
+    "start": "electromon .",
     "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
     "package-win": "electron-packager . --overwrite --asar --platform=win32 --arch=ia32 --icon=assets/icons/win/icon.ico --prune=true --out=release-builds --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"reception\"",
     "package-linux": "electron-packager . --overwrite --asar --platform=linux --arch=x64 --icon=assets/icons/lin/icon.icns --prune=true --out=release-builds"
