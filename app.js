@@ -111,7 +111,7 @@ ipcMain.on('updateItemNotReturned', (e, item) => {
   );
 });
 
-ipcMain.on('updateNote', (e, item, noteValue) => {
+ipcMain.on('updateNote', (e, item, noteValue, returnedStatus) => {
   db.update(
     { id: item.item.id },
     {
@@ -121,7 +121,7 @@ ipcMain.on('updateNote', (e, item, noteValue) => {
       card: item.item.card,
       date: item.item.date,
       hour: item.item.hour,
-      returned: item.item.returned,
+      returned: item.returnedStatus,
       note: item.noteValue,
       type: 'colleagues'
     },

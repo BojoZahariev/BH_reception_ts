@@ -61,6 +61,9 @@ colleaguesBtn.addEventListener('click', function(e) {
   backBtn.style.display = 'block';
   item.focus();
   fireTest();
+
+  //clear old records once a day
+  runOncePerDay();
 });
 
 visitorsBtn.addEventListener('click', function(e) {
@@ -69,6 +72,9 @@ visitorsBtn.addEventListener('click', function(e) {
   backBtn.style.display = 'block';
   visitorsItem.focus();
   fireTest();
+
+  //clear old records once a day
+  runOncePerDay();
 });
 
 colleaguesListBtn.addEventListener('click', function(e) {
@@ -132,6 +138,9 @@ colleaguesListBtn.addEventListener('click', function(e) {
 
   //clear the list first
   list.innerHTML = '';
+
+  //clear old records once a day
+  runOncePerDay();
 });
 
 visitorsListBtn.addEventListener('click', function(e) {
@@ -196,6 +205,9 @@ visitorsListBtn.addEventListener('click', function(e) {
 
   //clear the list first
   visitorsList.innerHTML = '';
+
+  //clear old records once a day
+  runOncePerDay();
 });
 
 backBtn.addEventListener('click', function(e) {
@@ -214,6 +226,9 @@ const backToInitial = () => {
 
   lastDate = '';
   lastDateV = '';
+
+  form.reset();
+  visitorsForm.reset();
 };
 
 archiveBtn.addEventListener('click', function(e) {
@@ -269,7 +284,7 @@ archiveBtn.addEventListener('click', function(e) {
   });
 
   //clear records older than 6 months
-  clearOld();
+  runOncePerDay();
 });
 
 //clear the password div holder
@@ -320,17 +335,17 @@ const render = item => {
   li.appendChild(date);
 
   const name1 = document.createElement('p');
-  name1.textContent = item.firstName.charAt(0).toUpperCase() + item.firstName.slice(1);
+  name1.textContent = item.firstName.toUpperCase();
   name1.classList.add('names');
   li.appendChild(name1);
 
   const name2 = document.createElement('p');
-  name2.textContent = item.lastName.charAt(0).toUpperCase() + item.lastName.slice(1);
+  name2.textContent = item.lastName.toUpperCase();
   name2.classList.add('names');
   li.appendChild(name2);
 
   const card = document.createElement('p');
-  card.textContent = item.card;
+  card.textContent = item.card.toUpperCase();
   card.classList.add('names');
   li.appendChild(card);
 
@@ -388,7 +403,9 @@ const render = item => {
       if (inputNote.value !== '') {
         note.textContent = inputNote.value;
         let noteValue = inputNote.value;
-        ipcRenderer.send('updateNote', { item, noteValue });
+        //get the actual status of returned
+        let returnedStatus = returnedCheck.textContent;
+        ipcRenderer.send('updateNote', { item, noteValue, returnedStatus });
         noteForm.reset();
         noteDiv.style.display = 'none';
       } else {
@@ -451,23 +468,23 @@ const renderVisitors = item => {
   li.appendChild(date);
 
   const name1 = document.createElement('p');
-  name1.textContent = item.firstName.charAt(0).toUpperCase() + item.firstName.slice(1);
+  name1.textContent = item.firstName.toUpperCase();
   name1.classList.add('names');
   li.appendChild(name1);
 
   const name2 = document.createElement('p');
-  name2.textContent = item.lastName.charAt(0).toUpperCase() + item.lastName.slice(1);
+  name2.textContent = item.lastName.toUpperCase();
   name2.classList.add('names');
   li.appendChild(name2);
 
   const company = document.createElement('p');
-  company.textContent = item.company;
+  company.textContent = item.company.toUpperCase();
   company.classList.add('names');
   company.classList.add('capitalize');
   li.appendChild(company);
 
   const visiting = document.createElement('p');
-  visiting.textContent = item.visiting;
+  visiting.textContent = item.visiting.toUpperCase();
   visiting.classList.add('names');
   visiting.classList.add('capitalize');
   li.appendChild(visiting);
@@ -749,7 +766,7 @@ const clearOld = () => {
   //add zero if < 10
   let arr = sixAgo.split('/');
   const zerAd = arr.map(i => {
-    if (i < 10) {
+    if (i.length < 2) {
       i = '0' + i;
       return i;
     } else {
@@ -761,3 +778,30 @@ const clearOld = () => {
   console.log(sixAgoFormated);
   ipcRenderer.send('deleteOld', { sixAgoFormated });
 };
+
+// Clears the old once a day if one day has passed.
+function hasOneDayPassed() {
+  // get today's date.
+  var date = new Date().toLocaleDateString();
+
+  // if there's a date in localstorage and it's equal to the above:
+  // inferring a day has yet to pass since both dates are equal.
+  if (localStorage.myDate == date) return false;
+
+  // this portion of logic occurs when a day has passed
+  localStorage.myDate = date;
+  return true;
+}
+
+// some function which should run once a day
+function runOncePerDay() {
+  if (!hasOneDayPassed()) {
+    console.log('cleared');
+    return false;
+  } else {
+    clearOld();
+  }
+}
+
+//clear old records once a day
+runOncePerDay();

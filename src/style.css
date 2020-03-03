@@ -87,12 +87,13 @@ body {
 #backBtn {
   width: 100px;
   position: fixed;
-  bottom: 0;
+  bottom: 10px;
   left: 10px;
   cursor: pointer;
   display: none;
   transform: scaleX(-1);
   transition: all 0.3s;
+  z-index: 999;
 }
 
 #backBtn:hover {
@@ -111,7 +112,7 @@ body {
 #listButtons {
   position: fixed;
   bottom: 0;
-  padding: 10px;
+  padding: 20px;
   width: 100%;
   text-align: center;
 }
