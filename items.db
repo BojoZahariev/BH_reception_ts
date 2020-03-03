@@ -5,18 +5,26 @@
 {"id":1583170334709,"firstName":"bojo","lastName":"zahariev","card":"44","date":"02/03/2020","hour":"17:32","returned":"Returned","note":"pci","type":"colleagues","_id":"K52krr4UVDvVYfrs"}
 {"id":1583170351952,"firstName":"john","lastName":"smith","card":"09","date":"02/03/2020","hour":"17:32","returned":"Returned","note":"Click to add","type":"colleagues","_id":"TN8Jjs3ownuSyFrY"}
 {"id":1583258239332,"firstName":"vvvvvvv","lastName":"vvvvvvvv","card":"77","date":"03/03/2020","hour":"17:57","returned":"Returned","note":"bbb","type":"colleagues","_id":"TeOySX7Wv8cJiipQ"}
-{"card":"55","date":"03/03/2020","firstName":"vera","hour":"18:28","id":1583260081083,"lastName":"stone","note":"Click to add","returned":"Not Returned","type":"colleagues","_id":"XIj7kFnoYytXq20u"}
+{"id":1583260081083,"firstName":"vera","lastName":"stone","card":"55","date":"03/03/2020","hour":"18:28","returned":"Returned","note":"llll","type":"colleagues","_id":"XIj7kFnoYytXq20u"}
 {"company":"acme","date":"02/03/2020","firstName":"john","hour":"17:33","id":1583170397028,"lastName":"stills","type":"visitors","visiting":"bojo zahariev","_id":"Z4bRHltj1q8pzfDo"}
 {"id":1583102494218,"firstName":"bnbnbnbn","lastName":"dfdfdfdfd","card":"21","date":"01/03/2020","hour":"22:41","returned":"Returned","note":"Click to add","type":"colleagues","_id":"ZUgJuDD7sBtRerkM"}
 {"company":"qqqq","date":"03/03/2020","firstName":"qqq","hour":"18:12","id":1583259178728,"lastName":"qqqqqq","type":"visitors","visiting":"qqqqqq","_id":"a0x4qNtq0ZqMeI1x"}
 {"company":"bbbbbbbb","date":"03/03/2020","firstName":"bbbbbbb","hour":"18:29","id":1583260169800,"lastName":"bbbbbb","type":"visitors","visiting":"bbbbbbb","_id":"fCwfYR4uXeEuTZgl"}
 {"company":"vvvvvvvv","date":"29/02/2020","firstName":"vvvvv","hour":"12:02","id":1582977769996,"lastName":"vvvvvvv","type":"visitors","visiting":"vvvvvv nnnnnn","_id":"iOG5NOwtRmgNk47E"}
+{"id":1583268650360,"firstName":"hhhh","lastName":"hhhhh","card":"99","date":"03/03/2020","hour":"20:50","returned":"Returned","note":"iii","type":"colleagues","_id":"kGiPoubmqwXD90op"}
 {"company":"fffffff","date":"02/03/2020","firstName":"ffff","hour":"20:06","id":1583179592291,"lastName":"fffffff","type":"visitors","visiting":"ffffffff","_id":"lQWfLNakV4eBBhl4"}
 {"id":1583258966968,"firstName":"nnnnnnnn","lastName":"mmmmmm","card":"11","date":"03/03/2020","hour":"18:09","returned":"Returned","note":"nnnn","type":"colleagues","_id":"nCiBOLNnQmJXTtQE"}
 {"card":"22","date":"01/03/2020","firstName":"xsderr","hour":"22:42","id":1583102525225,"lastName":"ghghghghghg","note":"Click to add","returned":"Not Returned","type":"colleagues","_id":"npaoj2nnh7MlpxVl"}
 {"company":"xxxxxxxxxx","date":"01/03/2020","firstName":"xxxxxxxxx","hour":"22:42","id":1583102561094,"lastName":"xxxxxxxxx","type":"visitors","visiting":"xxxxxxxx fffffff","_id":"ofaklqHuP2qw4mEW"}
-{"card":"bh7","date":"03/03/2020","firstName":"vvvvv","hour":"18:21","id":1583259665393,"lastName":"vvvvv","note":"Click to add","returned":"Not Returned","type":"colleagues","_id":"rnrF4UqJZaQyg1ks"}
+{"id":1583259665393,"firstName":"vvvvv","lastName":"vvvvv","card":"bh7","date":"03/03/2020","hour":"18:21","returned":"Not Returned","type":"colleagues","_id":"rnrF4UqJZaQyg1ks"}
 {"card":"01","date":"29/02/2020","firstName":"xxxxx","hour":"11:44","id":1582976667178,"lastName":"xxxxxxx","note":"Click to add","returned":"Not Returned","type":"colleagues","_id":"sL5rbN61e9xTN4rB"}
 {"id":1583259091160,"firstName":"tttttt","lastName":"tttttt","card":"11","date":"03/03/2020","hour":"18:11","returned":"Returned","note":"Click to add","type":"colleagues","_id":"vItriLEKqPhVBkZ7"}
 {"id":1583174648162,"firstName":"nmmmmm","lastName":"mmmmm","card":"2","date":"02/03/2020","hour":"18:44","returned":"Returned","note":"Click to add","type":"colleagues","_id":"xSgV20sFknYKgIni"}
-{"card":"6","date":"03/03/2020","firstName":"ggg","hour":"18:14","id":1583259289144,"lastName":"gggg","note":"Click to add","returned":"Not Returned","type":"colleagues","_id":"zwXklvEkG5iiIgnn"}
+{"id":1583259289144,"firstName":"ggg","lastName":"gggg","card":"6","date":"03/03/2020","hour":"18:14","returned":"Returned","note":"kkkk","type":"colleagues","_id":"zwXklvEkG5iiIgnn"}
+{"id":1583259665393,"firstName":"vvvvv","lastName":"vvvvv","card":"bh7","date":"03/03/2020","hour":"18:21","returned":"Not Returned","note":"hhh","type":"colleagues","_id":"rnrF4UqJZaQyg1ks"}
+{"id":1583259665393,"firstName":"vvvvv","lastName":"vvvvv","card":"bh7","date":"03/03/2020","hour":"18:21","returned":"Returned","note":"hhh","type":"colleagues","_id":"rnrF4UqJZaQyg1ks"}
+{"id":1583268650360,"firstName":"hhhh","lastName":"hhhhh","card":"99","date":"03/03/2020","hour":"20:50","returned":"Not Returned","note":"iii","type":"colleagues","_id":"kGiPoubmqwXD90op"}
+{"id":1583268650360,"firstName":"hhhh","lastName":"hhhhh","card":"99","date":"03/03/2020","hour":"20:50","returned":"Not Returned","note":"ki","type":"colleagues","_id":"kGiPoubmqwXD90op"}
+{"id":1583260081083,"firstName":"vera","lastName":"stone","card":"55","date":"03/03/2020","hour":"18:28","returned":"Not Returned","note":"llll","type":"colleagues","_id":"XIj7kFnoYytXq20u"}
+{"id":1583268650360,"firstName":"hhhh","lastName":"hhhhh","card":"99","date":"03/03/2020","hour":"20:50","returned":"Returned","note":"ki","type":"colleagues","_id":"kGiPoubmqwXD90op"}
+{"id":1583260081083,"firstName":"vera","lastName":"stone","card":"55","date":"03/03/2020","hour":"18:28","returned":"Returned","note":"llll","type":"colleagues","_id":"XIj7kFnoYytXq20u"}

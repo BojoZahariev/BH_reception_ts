@@ -423,12 +423,13 @@ const render = item => {
   li.appendChild(deleteBtn);
 
   returnedCheck.addEventListener('click', function(e) {
+    let noteContent = note.textContent;
     if (this.textContent === 'Not Returned') {
-      ipcRenderer.send('updateItemReturned', { item });
+      ipcRenderer.send('updateItemReturned', { item, noteContent });
       this.textContent = 'Returned';
       this.style.color = '#76c043';
     } else if (this.textContent === 'Returned') {
-      ipcRenderer.send('updateItemNotReturned', { item });
+      ipcRenderer.send('updateItemNotReturned', { item, noteContent });
       this.textContent = 'Not Returned';
       this.style.color = 'red';
     }
@@ -565,12 +566,7 @@ form.addEventListener('submit', e => {
 visitorsForm.addEventListener('submit', e => {
   e.preventDefault();
 
-  if (
-    visitorsItem.value.length > 1 &&
-    visitorsItem2.value.length > 1 &&
-    visitorsItem3.value.length > 1 &&
-    visitorsItem4.value.length > 1
-  ) {
+  if (visitorsItem.value.length > 1 && visitorsItem2.value.length > 1 && visitorsItem3.value.length > 1 && visitorsItem4.value.length > 1) {
     ipcRenderer.send('addItem', {
       id: Date.now(),
       date: getToday().slice(0, 10),
@@ -796,7 +792,6 @@ function hasOneDayPassed() {
 // some function which should run once a day
 function runOncePerDay() {
   if (!hasOneDayPassed()) {
-    console.log('cleared');
     return false;
   } else {
     clearOld();
