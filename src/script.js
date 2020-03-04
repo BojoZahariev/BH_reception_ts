@@ -758,21 +758,11 @@ const clearOld = () => {
   var d = new Date();
   d.setMonth(d.getMonth() - 6);
   let sixAgo = d.toLocaleDateString();
-
-  //add zero if < 10
   let arr = sixAgo.split('/');
-  const zerAd = arr.map(i => {
-    if (i.length < 2) {
-      i = '0' + i;
-      return i;
-    } else {
-      return i;
-    }
-  });
-
-  const sixAgoFormated = `${zerAd[1]}/${zerAd[0]}/${zerAd[2]}`;
-  console.log(sixAgoFormated);
-  ipcRenderer.send('deleteOld', { sixAgoFormated });
+  //add zero if < 10 and put the date before the month
+  const sixAgoFormatted = `${addZero(arr[1])}/${addZero(arr[0])}/${arr[2]}`;
+  console.log(sixAgoFormatted);
+  ipcRenderer.send('deleteOld', { sixAgoFormatted });
 };
 
 // Clears the old once a day if one day has passed.
@@ -789,7 +779,7 @@ function hasOneDayPassed() {
   return true;
 }
 
-// some function which should run once a day
+//run once a day
 function runOncePerDay() {
   if (!hasOneDayPassed()) {
     return false;
