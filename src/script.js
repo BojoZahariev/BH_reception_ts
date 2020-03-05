@@ -757,10 +757,12 @@ const clearOld = () => {
   //get the date 6 months ago
   var d = new Date();
   d.setMonth(d.getMonth() - 6);
-  let sixAgo = d.toLocaleDateString();
-  let arr = sixAgo.split('/');
-  //add zero if < 10 and put the date before the month
-  const sixAgoFormatted = `${addZero(arr[1])}/${addZero(arr[0])}/${arr[2]}`;
+
+  let day = addZero(d.getDate());
+  let month = addZero(d.getMonth() + 1);
+  let year = d.getFullYear();
+
+  const sixAgoFormatted = day + '/' + month + '/' + year;
   console.log(sixAgoFormatted);
   ipcRenderer.send('deleteOld', { sixAgoFormatted });
 };
@@ -772,7 +774,9 @@ function hasOneDayPassed() {
 
   // if there's a date in localstorage and it's equal to the above:
   // inferring a day has yet to pass since both dates are equal.
-  if (localStorage.myDate == date) return false;
+  if (localStorage.myDate == date) {
+    return false;
+  }
 
   // this portion of logic occurs when a day has passed
   localStorage.myDate = date;
