@@ -806,7 +806,6 @@ ipcRenderer.on('deletedOld', (e, numRemoved) => {
 //clear old records once a day
 runOncePerDay();
 
-/*
 //Virtual keyboard
 
 const Keyboard = {
@@ -991,4 +990,3 @@ const Keyboard = {
 window.addEventListener('DOMContentLoaded', function () {
   Keyboard.init();
 });
-*/
