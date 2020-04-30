@@ -83,9 +83,21 @@ ipcMain.on('deleteItem', (e, item) => {
   db.remove({ id: item.item.id }, {});
 });
 
-//clear older than 6 months
+//DELETE Older than 6 months
+
 ipcMain.on('deleteOld', (e, item) => {
-  db.remove({ date: item.sixAgoFormatted }, { multi: true }, function (err, numRemoved) {});
+  db.remove(
+    {
+      $where: function () {
+        return this.date.includes(item.sixAgoFormattedMonth);
+      },
+    },
+    { multi: true },
+    function (err, numRemoved) {
+      if (err) throw new Error(err);
+      mainWindow.webContents.send('deletedOld', numRemoved);
+    }
+  );
 });
 
 //update returned

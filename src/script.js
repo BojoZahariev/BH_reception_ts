@@ -55,7 +55,7 @@ const archHeadC = document.querySelector('#archHeadC');
 var lastDate;
 var lastDateV;
 
-colleaguesBtn.addEventListener('click', function(e) {
+colleaguesBtn.addEventListener('click', function (e) {
   initialDiv.style.display = 'none';
   colleaguesDiv.style.display = 'block';
   backBtn.style.display = 'block';
@@ -66,7 +66,7 @@ colleaguesBtn.addEventListener('click', function(e) {
   runOncePerDay();
 });
 
-visitorsBtn.addEventListener('click', function(e) {
+visitorsBtn.addEventListener('click', function (e) {
   initialDiv.style.display = 'none';
   visitorsDiv.style.display = 'block';
   backBtn.style.display = 'block';
@@ -77,7 +77,7 @@ visitorsBtn.addEventListener('click', function(e) {
   runOncePerDay();
 });
 
-colleaguesListBtn.addEventListener('click', function(e) {
+colleaguesListBtn.addEventListener('click', function (e) {
   clearPasswordDiv();
 
   let passwordDiv = document.createElement('div');
@@ -104,11 +104,11 @@ colleaguesListBtn.addEventListener('click', function(e) {
   close.classList.add('close');
   passwordDiv.appendChild(close);
 
-  close.addEventListener('click', e => {
+  close.addEventListener('click', (e) => {
     passwordDivHolder.style.display = 'none';
   });
 
-  passwordForm.addEventListener('submit', e => {
+  passwordForm.addEventListener('submit', (e) => {
     e.preventDefault();
     if (inputPassword.value === 'bh' || inputPassword.value === 'BH') {
       initialDiv.style.display = 'none';
@@ -122,7 +122,7 @@ colleaguesListBtn.addEventListener('click', function(e) {
     } else {
       passwordMsg.textContent = 'Wrong password';
       passwordForm.reset();
-      setTimeout(function() {
+      setTimeout(function () {
         passwordDivHolder.style.display = 'none';
         passwordMsg.textContent = 'Enter password';
       }, 1500);
@@ -133,7 +133,7 @@ colleaguesListBtn.addEventListener('click', function(e) {
   ipcRenderer.send('loadListColleagues', {
     today: getToday().slice(0, 10),
     yesterday: getYesterday().slice(0, 10),
-    type: 'colleagues'
+    type: 'colleagues',
   });
 
   //clear the list first
@@ -143,7 +143,7 @@ colleaguesListBtn.addEventListener('click', function(e) {
   runOncePerDay();
 });
 
-visitorsListBtn.addEventListener('click', function(e) {
+visitorsListBtn.addEventListener('click', function (e) {
   clearPasswordDiv();
 
   let passwordDiv = document.createElement('div');
@@ -171,11 +171,11 @@ visitorsListBtn.addEventListener('click', function(e) {
   close.classList.add('close');
   passwordDiv.appendChild(close);
 
-  close.addEventListener('click', e => {
+  close.addEventListener('click', (e) => {
     passwordDivHolder.style.display = 'none';
   });
 
-  passwordForm.addEventListener('submit', e => {
+  passwordForm.addEventListener('submit', (e) => {
     e.preventDefault();
     if (inputPassword.value === 'bh' || inputPassword.value === 'BH') {
       initialDiv.style.display = 'none';
@@ -189,7 +189,7 @@ visitorsListBtn.addEventListener('click', function(e) {
     } else {
       passwordMsg.textContent = 'Wrong password';
       passwordForm.reset();
-      setTimeout(function() {
+      setTimeout(function () {
         passwordDivHolder.style.display = 'none';
         passwordMsg.textContent = 'Enter password';
       }, 1500);
@@ -200,7 +200,7 @@ visitorsListBtn.addEventListener('click', function(e) {
   ipcRenderer.send('loadListVisitors', {
     today: getToday().slice(0, 10),
     yesterday: getYesterday().slice(0, 10),
-    type: 'visitors'
+    type: 'visitors',
   });
 
   //clear the list first
@@ -210,7 +210,7 @@ visitorsListBtn.addEventListener('click', function(e) {
   runOncePerDay();
 });
 
-backBtn.addEventListener('click', function(e) {
+backBtn.addEventListener('click', function (e) {
   backToInitial();
 });
 
@@ -231,7 +231,7 @@ const backToInitial = () => {
   visitorsForm.reset();
 };
 
-archiveBtn.addEventListener('click', function(e) {
+archiveBtn.addEventListener('click', function (e) {
   clearPasswordDiv();
 
   let passwordDiv = document.createElement('div');
@@ -258,11 +258,11 @@ archiveBtn.addEventListener('click', function(e) {
   close.classList.add('close');
   passwordDiv.appendChild(close);
 
-  close.addEventListener('click', e => {
+  close.addEventListener('click', (e) => {
     passwordDivHolder.style.display = 'none';
   });
 
-  passwordForm.addEventListener('submit', e => {
+  passwordForm.addEventListener('submit', (e) => {
     e.preventDefault();
     if (inputPassword.value === 'bh' || inputPassword.value === 'BH') {
       initialDiv.style.display = 'none';
@@ -276,7 +276,7 @@ archiveBtn.addEventListener('click', function(e) {
     } else {
       passwordMsg.textContent = 'Wrong password';
       passwordForm.reset();
-      setTimeout(function() {
+      setTimeout(function () {
         passwordDivHolder.style.display = 'none';
         passwordMsg.textContent = 'Enter password';
       }, 1500);
@@ -325,7 +325,7 @@ const getYesterday = () => {
 };
 
 //Render colleagues
-const render = item => {
+const render = (item) => {
   const li = document.createElement('li');
   li.classList.add('colleaguesListPart');
 
@@ -369,7 +369,7 @@ const render = item => {
   li.appendChild(note);
 
   //add note
-  note.addEventListener('click', function(e) {
+  note.addEventListener('click', function (e) {
     let noteDiv = document.createElement('div');
     noteDiv.classList.add('passwordDiv');
     document.body.appendChild(noteDiv);
@@ -394,11 +394,11 @@ const render = item => {
     close.classList.add('close');
     noteDiv.appendChild(close);
 
-    close.addEventListener('click', e => {
+    close.addEventListener('click', (e) => {
       noteDiv.style.display = 'none';
     });
 
-    noteForm.addEventListener('submit', e => {
+    noteForm.addEventListener('submit', (e) => {
       e.preventDefault();
       if (inputNote.value !== '') {
         note.textContent = inputNote.value;
@@ -409,7 +409,7 @@ const render = item => {
         noteForm.reset();
         noteDiv.style.display = 'none';
       } else {
-        setTimeout(function() {
+        setTimeout(function () {
           noteDiv.style.display = 'none';
         }, 1500);
       }
@@ -422,7 +422,7 @@ const render = item => {
   deleteBtn.classList.add('deleteBtn');
   li.appendChild(deleteBtn);
 
-  returnedCheck.addEventListener('click', function(e) {
+  returnedCheck.addEventListener('click', function (e) {
     let noteContent = note.textContent;
     if (this.textContent === 'Not Returned') {
       ipcRenderer.send('updateItemReturned', { item, noteContent });
@@ -435,7 +435,7 @@ const render = item => {
     }
   });
 
-  deleteBtn.addEventListener('click', function(e) {
+  deleteBtn.addEventListener('click', function (e) {
     let div = deleteBtn.parentElement;
     div.style.display = 'none';
     div.classList.remove('today');
@@ -459,7 +459,7 @@ const render = item => {
 };
 
 //render visitors
-const renderVisitors = item => {
+const renderVisitors = (item) => {
   const li = document.createElement('li');
   li.classList.add('colleaguesListPart');
 
@@ -496,7 +496,7 @@ const renderVisitors = item => {
   deleteBtn.classList.add('deleteBtn');
   li.appendChild(deleteBtn);
 
-  deleteBtn.addEventListener('click', function(e) {
+  deleteBtn.addEventListener('click', function (e) {
     let div = deleteBtn.parentElement;
     div.style.display = 'none';
     div.classList.remove('todayVisitors');
@@ -522,7 +522,7 @@ const renderVisitors = item => {
 //catch loaded colleagues list
 ipcRenderer.on('loadedColleagues', (e, items) =>
   //send for display
-  items.forEach(function(item) {
+  items.forEach(function (item) {
     list.appendChild(render(item));
     colleaguesCount.textContent = list.getElementsByClassName('today').length;
   })
@@ -531,14 +531,14 @@ ipcRenderer.on('loadedColleagues', (e, items) =>
 //catch loaded visitors list
 ipcRenderer.on('loadedVisitors', (e, items) =>
   //send for display
-  items.forEach(function(item) {
+  items.forEach(function (item) {
     visitorsList.appendChild(renderVisitors(item));
     visitorsCount.textContent = visitorsList.getElementsByClassName('todayVisitors').length;
   })
 );
 
 //Send Item to the server
-form.addEventListener('submit', e => {
+form.addEventListener('submit', (e) => {
   e.preventDefault();
 
   if (item.value.length > 1 && item2.value.length > 1 && item3.value.length > 0) {
@@ -551,7 +551,7 @@ form.addEventListener('submit', e => {
       card: item3.value,
       returned: 'Not Returned',
       note: 'Click to add',
-      type: 'colleagues'
+      type: 'colleagues',
     });
 
     playSound('success');
@@ -563,10 +563,15 @@ form.addEventListener('submit', e => {
   }
 });
 
-visitorsForm.addEventListener('submit', e => {
+visitorsForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  if (visitorsItem.value.length > 1 && visitorsItem2.value.length > 1 && visitorsItem3.value.length > 1 && visitorsItem4.value.length > 1) {
+  if (
+    visitorsItem.value.length > 1 &&
+    visitorsItem2.value.length > 1 &&
+    visitorsItem3.value.length > 1 &&
+    visitorsItem4.value.length > 1
+  ) {
     ipcRenderer.send('addItem', {
       id: Date.now(),
       date: getToday().slice(0, 10),
@@ -575,7 +580,7 @@ visitorsForm.addEventListener('submit', e => {
       lastName: visitorsItem2.value,
       company: visitorsItem3.value,
       visiting: visitorsItem4.value,
-      type: 'visitors'
+      type: 'visitors',
     });
 
     playSound('success');
@@ -598,12 +603,12 @@ const fail = () => {
   noteMsg.textContent = 'Please fill all the boxes and use full names';
   noteDiv.appendChild(noteMsg);
 
-  setTimeout(function() {
+  setTimeout(function () {
     noteDiv.style.display = 'none';
   }, 2000);
 };
 
-const addZero = i => {
+const addZero = (i) => {
   if (i < 10) {
     i = '0' + i;
   }
@@ -611,7 +616,7 @@ const addZero = i => {
 };
 
 //archive submit and send to db
-archForm.addEventListener('submit', e => {
+archForm.addEventListener('submit', (e) => {
   e.preventDefault();
 
   //clear the list
@@ -633,7 +638,7 @@ archForm.addEventListener('submit', e => {
     firstName,
     lastName,
     card,
-    month
+    month,
   });
 });
 
@@ -643,7 +648,7 @@ ipcRenderer.on('found', (e, docs) => {
   archHeadC.style.display = 'none';
   archHeadV.style.display = 'none';
   archNumberLi.textContent = '';
-  docs.forEach(function(item) {
+  docs.forEach(function (item) {
     if (item.type === 'colleagues') {
       archList.appendChild(render(item));
       archHeadC.style.display = 'flex';
@@ -693,11 +698,11 @@ ipcRenderer.on('clearAll', () => {
   close.classList.add('close');
   passwordDiv.appendChild(close);
 
-  close.addEventListener('click', e => {
+  close.addEventListener('click', (e) => {
     passwordDivHolder.style.display = 'none';
   });
 
-  passwordForm.addEventListener('submit', function(e) {
+  passwordForm.addEventListener('submit', function (e) {
     e.preventDefault();
 
     if (inputPassword.value === 'bhadmin') {
@@ -707,7 +712,7 @@ ipcRenderer.on('clearAll', () => {
     } else {
       passwordMsg.textContent = 'Wrong password';
       passwordForm.reset();
-      setTimeout(function() {
+      setTimeout(function () {
         passwordDivHolder.style.display = 'none';
         passwordMsg.textContent = 'Enter password';
       }, 1500);
@@ -720,7 +725,7 @@ ipcRenderer.on('cleared', () => {
   visitorsList.innerHTML = '';
 });
 
-const playSound = status => {
+const playSound = (status) => {
   let sound1 = document.getElementById('audio1');
   let sound2 = document.getElementById('audio2');
   if (status === 'success') {
@@ -728,7 +733,7 @@ const playSound = status => {
 
     //show thank you
     tyDiv.style.display = 'flex';
-    setTimeout(function() {
+    setTimeout(function () {
       tyDiv.style.display = 'none';
     }, 2000);
   } else if (status === 'fail') {
@@ -754,17 +759,19 @@ const fireTest = () => {
 };
 
 const clearOld = () => {
-  //get the date 6 months ago
+  //get the date 7 months ago
   var d = new Date();
-  d.setMonth(d.getMonth() - 6);
+  d.setMonth(d.getMonth() - 7);
 
-  let day = addZero(d.getDate());
+  //let day = addZero(d.getDate());
   let month = addZero(d.getMonth() + 1);
   let year = d.getFullYear();
 
-  const sixAgoFormatted = day + '/' + month + '/' + year;
-  console.log(sixAgoFormatted);
-  ipcRenderer.send('deleteOld', { sixAgoFormatted });
+  let sixAgoFormattedMonth = month + '/' + year;
+
+  ipcRenderer.send('deleteOld', { sixAgoFormattedMonth });
+
+  console.log(sixAgoFormattedMonth);
 };
 
 // Clears the old once a day if one day has passed.
@@ -791,6 +798,10 @@ function runOncePerDay() {
     clearOld();
   }
 }
+
+ipcRenderer.on('deletedOld', (e, numRemoved) => {
+  console.log(numRemoved);
+});
 
 //clear old records once a day
 runOncePerDay();
