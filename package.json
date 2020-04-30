@@ -2,10 +2,12 @@
   "dependencies": {
     "electron": "^8.2.3",
     "electron-packager": "^14.0.3",
+    "material-components-web": "^6.0.0",
+    "material-design-icons": "^3.0.1",
     "nedb": "^1.8.0"
   },
   "name": "reception",
-  "version": "2.1.0",
+  "version": "1.0.0",
   "main": "app.js",
   "devDependencies": {},
   "scripts": {
