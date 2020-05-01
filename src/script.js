@@ -64,6 +64,11 @@ colleaguesBtn.addEventListener('click', function (e) {
 
   //clear old records once a day
   runOncePerDay();
+
+  //open vk
+  //setTimeout(function () {
+  Keyboard.open();
+  // }, 1000);
 });
 
 visitorsBtn.addEventListener('click', function (e) {
@@ -884,7 +889,6 @@ const Keyboard = {
       'J',
       'K',
       'L',
-
       'done',
       'Z',
       'X',
