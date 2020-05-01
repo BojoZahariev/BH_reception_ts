@@ -237,6 +237,8 @@ const backToInitial = () => {
 
   form.reset();
   visitorsForm.reset();
+
+  Keyboard.close();
 };
 
 archiveBtn.addEventListener('click', function (e) {
@@ -892,7 +894,7 @@ const Keyboard = {
       'J',
       'K',
       'L',
-      'done',
+
       'Z',
       'X',
       'C',
@@ -937,17 +939,6 @@ const Keyboard = {
           keyElement.addEventListener('click', () => {
             this.properties.value += ' ';
             this._triggerEvent('oninput');
-          });
-
-          break;
-
-        case 'done':
-          keyElement.classList.add('keyboard__key--wide', 'keyboard__key--dark');
-          keyElement.innerHTML = createIconHTML('check_circle');
-
-          keyElement.addEventListener('click', () => {
-            this.close();
-            this._triggerEvent('onclose');
           });
 
           break;
