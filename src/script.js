@@ -59,27 +59,30 @@ colleaguesBtn.addEventListener('click', function (e) {
   initialDiv.style.display = 'none';
   colleaguesDiv.style.display = 'block';
   backBtn.style.display = 'block';
-  item.focus();
+  //item.focus();
   fireTest();
 
   //clear old records once a day
   runOncePerDay();
 
   //open vk
-  //setTimeout(function () {
   Keyboard.open();
-  // }, 1000);
+  item.focus();
 });
 
 visitorsBtn.addEventListener('click', function (e) {
   initialDiv.style.display = 'none';
   visitorsDiv.style.display = 'block';
   backBtn.style.display = 'block';
-  visitorsItem.focus();
+  //visitorsItem.focus();
   fireTest();
 
   //clear old records once a day
   runOncePerDay();
+
+  //open vk
+  Keyboard.open();
+  visitorsItem.focus();
 });
 
 colleaguesListBtn.addEventListener('click', function (e) {
