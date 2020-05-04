@@ -176,6 +176,9 @@ body {
   margin: 100px auto;
   padding: 30px;
   background-color: #76c043;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .inputs {
@@ -280,6 +283,9 @@ body {
   padding: 30px;
   margin: 20px auto;
   background-color: #76c043;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /*LISTS*/
