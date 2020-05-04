@@ -190,6 +190,10 @@ body {
   margin: 10px;
 }
 
+.inputs:focus {
+  background-color: #78b9e7;
+}
+
 #input3,
 #archItem4 {
   width: 100px;
