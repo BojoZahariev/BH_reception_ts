@@ -832,7 +832,6 @@ const Keyboard = {
 
   properties: {
     value: '',
-    capsLock: true,
   },
 
   init() {
@@ -894,7 +893,6 @@ const Keyboard = {
       'J',
       'K',
       'L',
-
       'Z',
       'X',
       'C',
@@ -947,7 +945,7 @@ const Keyboard = {
           keyElement.textContent = key.toUpperCase();
 
           keyElement.addEventListener('click', () => {
-            this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
+            this.properties.value += key.toLowerCase();
             this._triggerEvent('oninput');
           });
 
@@ -985,6 +983,7 @@ const Keyboard = {
   },
 };
 
+//load keyboard at start but keep it hidden
 window.addEventListener('DOMContentLoaded', function () {
   Keyboard.init();
 });
